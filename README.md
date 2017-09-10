@@ -21,6 +21,9 @@ Resource materials provided by DoH: https://github.com/HACC17/challenges/tree/ma
 ## How to run:
 1. Clone/Download project to desired folder
 2. Navigate into "EAL_Surfer" directory via cmd prompt/*NIX shell
-3. Run command "python manage.py runserver"
+3. Run command 
+```bash
+python manage.py runserver
+```
 4. Open web browser and enter url: "http://127.0.0.1:8000/" (left it as default)
 5. Enjoy
