@@ -12,10 +12,10 @@ Resource materials provided by DoH: https://github.com/HACC17/challenges/tree/ma
 
 ## Prerequisites:
 * Basic command line knowledge
-* Python (we're using v 2.7.x, might need some tweaking in the code if you're planning to use v 3.6.x)
-* Pipi (v 9.0.1) or easy_install (v 36.4.0)
+* Python (v 2.7.x, might need some tweaking in the code if you're planning to use v 3.6.x)
+* Pip (v 9.0.1) or easy_install (v 36.4.0)
 * Sqlite3 (v 3.16.0 or equivalent)
-* Django (v 1.11.5
+* Django (v 1.11.5)
 * (Optional) virtualenv (v 15.1.0)
 
 ## How to run:
