@@ -1,24 +1,18 @@
 <html lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<meta name="language" content="english">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<!-- this is a comment
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta name="language" content="english">
+    <meta http-equiv="Content-Style-Type" content="text/css">
 
-	<script src="js/example.js"></script>
-
-
-    <script src="jquery-3.2.1.min.js"></script>
--->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-	<script>
+    <script>
 		$(function() {
 
 			$("#text-one").change(function() {
 				$("#text-two").load("textdata/" + $(this).val() + ".txt");
 			});
 
-			$("#json-one").change(function() {
+			$("#ContaminantType").change(function() {
 
 				var $dropdown = $(this);
 
@@ -37,7 +31,7 @@
                         vals = ['Please choose from above'];
                 }
 
-                var $jsontwo = $("#json-two");
+                var $jsontwo = $("#ContaminantName");
                 $jsontwo.empty();
                 $.each(vals, function(index, value) {
                     $jsontwo.append("<option>" + value + "</option>");
@@ -45,143 +39,137 @@
 			});
 
 		});
-	</script>
 
-  	 <script type = "text/javascript">
-	  // from textBoxes.html
-	  function getResult(){
-	  var LandUse = document.getElementById("LandUse");
-	  var GroundWaterUtility = document.getElementById("GroundWaterUtility");
-	  var DistanceToNearest = document.getElementById("DistanceToNearest");
-	  var json-one = document.getElementById("json-one");
-	  var json-two = document.getElementById("json-two");
-	  var txtSoil = document.getElementById("txtSoil");
-	  var txtGroundwater = document.getElementById("txtGroundwater");
-	  var txtVapor = document.getElementById("txtVapor");
-	  var name = txtName.value;
-	  txtOutput.value = "Hi there, " + name + "!"
-	  } // end getResult
-	</script>
+		$(document).ready(function () {
+            $('#myform').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url : $(this).attr('action'),
+                    type: "GET",
+                    data:
+                    {
+                        LandUse: $("#LandUse").val(),
+                        GroundWaterUtility: $("#GroundWaterUtility").val(),
+                        DistanceToNearest: $("#DistanceToNearest").val(),
+                        ContaminantType: $("#ContaminantType").val(),
+                        ContaminantName: $("#ContaminantName").val()
+                    },
+                });
+            });
+        });
+    </script>
 
-<title></title>
+    <script type="text/javascript">
+        // from textBoxes.html
+        function getResult(){
+            var LandUse = document.getElementById("LandUse");
+            var GroundWaterUtility = document.getElementById("GroundWaterUtility");
+            var DistanceToNearest = document.getElementById("DistanceToNearest");
+            var ContaminantType = document.getElementById("ContaminantType");
+            var ContaminantName = document.getElementById("ContaminantName");
+            var txtSoil = document.getElementById("txtSoil");
+            var txtGroundwater = document.getElementById("txtGroundwater");
+            var txtVapor = document.getElementById("txtVapor");
+            var name = txtName.value;
+            txtOutput.value = "Hi there, " + name + "!"
+        } // end getResult
 
-<style type="text/css">
 
-#navbar #country-select {
-float: left;
-width: 188px;
-height:39px;
-}
 
-#vertical{
-float:left;
-width:100%;
-height:50%;
-margin-top:-11px; /* half the select height*/
-}
 
-#navbar select {
-clear:both;
-width: 188px;
-height:22px;
-}
+    </script>
 
-</style>
+    <title></title>
 
+    <style type="text/css">
+        #navbar #country-select {
+            float: left;
+            width: 188px;
+            height:39px;
+        }
+
+        #vertical{
+            float:left;
+            width:100%;
+            height:50%;
+            margin-top:-11px; /* half the select height*/
+        }
+
+        #navbar select {
+            clear:both;
+            width: 188px;
+            height:22px;
+        }
+
+
+    </style>
 </head>
 
 <body>
 
-<h1>EAL Surfer <a href="#"><img class="smaller-image" alt="EAL Surfer logo" src="{{ STATIC_URL }} /static/EALSurferLog.png"></a>
-</h1>
+<h1>EAL Surfer <a href="#"><img class="smaller-image" alt="EAL Surfer logo" src="{{ STATIC_URL }} /static/EALSurferLog.png"></a></h1>
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <h2 class="red-text">Environmental Action Levels Surfer</h2>
-<h3>Hawaii DOH </h3>
-<a href="#"><img class="smaller-image" alt="About Department of Health logo" src="http://health.hawaii.gov/about/files/2014/04/logo.png"></a>
-<h3>   </h3>
+<h3>Hawaii DOH </h3> <a href="#"><img class="smaller-image" alt="About Department of Health logo" src="http://health.hawaii.gov/about/files/2014/04/logo.png"></a>
+<h3></h3>
 <h3>Site Input Worksheet</h3>
-
 <div id="navbar">
 
-<div id="country-select">
+    <div id="country-select">
 
-<div id="vertical">
+        <div id="vertical">
+            <form id="myform" action="" method="get">
+                <label>Land Use: </label>
+                <select id="LandUse">
+                    <option selected value="base">Please Select</option>
+                    <option value="unrestricted">Unrestricted</option>
+                    <option value="commercial">Commercia/Industrial Only</option>
+                </select>
+                <h3></h3>
+                <label>Ground Water Utility: </label>
+                <select id="GroundWaterUtility">
+                    <option selected value="base">Please Select</option>
+                    <option value="drinking">Dringin Water Resource</option>
+                    <option value="nondrinking">Nondrinking Water Resource</option>
+                </select>
+                <h3></h3>
+                <label>Distance To Nearest Surface Water Body: </label>
+                <select id="DistanceToNearest">
+                    <option selected value="base">Please Select</option>
+                    <option value="lessthan"> < 150m</option>
+                    <option value="greaterthan"> > 150m</option>
+                </select>
+                <h3></h3>
+                <label>Select Contaminant</label>
+                <select id="ContaminantType">
+                    <option selected value="base">Please Select</option>
+                    <option value="Chemical">Chemical</option>
+                    <option value="CAS">CAS</option>
+                </select>
+                <select id="ContaminantName">
+                    <option>Please choose from above</option>
+                </select>
+                <h3></h3>
 
-  <label>Land Use: </label>
-  <select id="LandUse">
-    <option selected value="base">Please Select</option>
-    <option value="unrestricted">Unrestricted</option>
-    <option value="commercial">Commercia/Industrial Only</option>
-  </select>
-  <h3>   </h3>
-  <label>Ground Water Utility: </label>
-  <select id="GroundWaterUtility">
-    <option selected value="base">Please Select</option>
-    <option value="drinking">Dringin Water Resource</option>
-    <option value="nondrinking">Nondrinking Water Resource</option>
-  </select>
-  <h3>   </h3>
-  <label>Distance To Nearest Surface Water Body: </label>
-  <select id="DistanceToNearest">
-    <option selected value="base">Please Select</option>
-    <option value="lessthan"> < 150m </option>
-    <option value="greaterthan"> > 150m </option>
-  </select>
-  <h3>   </h3>
-  <label>Select Contaminant</label>
-    <select id="json-one">
-        <option selected value="base">Please Select</option>
-        <option value="Chemical">Chemical</option>
-        <option value="CAS">CAS</option>
-    </select>
-    <!---
-    <form method="POST"> {% csrf_token %}
-        <select name="base" onchange="this.form.submit()">
-            <option selected value="base">Please Select</option>
-            <option value="Chemical">Chemical</option>
-            <option value="CAS">CAS</option>
-        </select>
-    </form>
-    --->
-    <!---
-
-	<select id="json-two">
-		<option>Please choose from above</option>
-        {% for name in listOfchemicalNames %}
-            <option value="{{ name }}">{{ name }}</option>
-        {% endfor %}
-	</select>
-	--->
-    <select id="json-two">
-		<option>Please choose from above</option>
-	</select>
-    <h3>   </h3>
-
-    <input type = "button"
-    value = "Submit"
-    onclick = "getResult()"/>
-    <h3>   </h3>
-
-    <form action="/action_page.php" method="get">
-      <fieldset>
-      <label>Final EALs: </label>
-       <h3>   </h3>
-
-        Soil (mg/kg): <input type = "text"
-        id = "txtSoil" />
-        Groundwater (ug/L): <input type = "text"
-        id = "txtGroundwater" />
-        Soil Vapor (ug/m^3): <input type = "text"
-        id = "txtVapor" />
-      </fieldset>
-    </form>
-
-</script>
-</tbody>
+                <input type="submit" value="Submit">
+                <h3></h3>
+            </form>
 
 
-</div>
-</div>
+            <fieldset>
+                <label>Final EALs: </label>
+                <h3></h3>
+
+                Soil (mg/kg): <input type="text"
+                                     id="txtSoil"/>
+                Groundwater (ug/L): <input type="text"
+                                           id="txtGroundwater"/>
+                Soil Vapor (ug/m^3): <input type="text"
+                                            id="txtVapor"/>
+            </fieldset>
+
+        </div>
+    </div>
 </div>
 
 </body>

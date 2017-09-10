@@ -29,5 +29,11 @@ def index(request):
     #if request.POST.get("base", "") == 'chemical':
     #    dropDownlistValue = listOfchemicalNames
     #
+    if request.method == 'GET':
+        print request.GET.get('LandUse','')
+        print request.GET.get('GroundWaterUtility','')
+        print request.GET.get('DistanceToNearest','')
+        print request.GET.get('ContaminantType','')
+        print request.GET.get('ContaminantName','')
 
     return render(request, 'index.html', {'listOfchemicalNames': listOfchemicalNames, 'listOfCASNames' : listOfCASNames })
