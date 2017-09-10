@@ -9,7 +9,7 @@
 	
   <script src="jquery-3.2.1.min.js"></script>
 -->
-  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 	<script>
 		$(function() {
@@ -22,7 +22,7 @@
 			
 				var $dropdown = $(this);
 			
-				$.getJSON("chemical5.json", function(data) {
+				$.getJSON("chemical.json", function(data) {
 				
 					var key = $dropdown.val();
 					var vals = [];
@@ -49,6 +49,27 @@
 
 		});
 	</script>
+	
+	 <script type = "text/javascript">
+	  // from textBoxes.html
+	  function getResult(){
+	  var LandUse = document.getElementById("LandUse");
+	  var GroundWaterUtility = document.getElementById("GroundWaterUtility");
+	  var DistanceToNearest = document.getElementById("DistanceToNearest");
+	  var json-one = document.getElementById("json-one");
+	  var json-two = document.getElementById("json-two");
+	  var txtSoil = document.getElementById("txtSoil");
+	  var txtGroundwater = document.getElementById("txtGroundwater");
+	  var txtVapor = document.getElementById("txtVapor");
+	  var name = txtName.value;
+	  txtOutput.value = "Hi there, " + name + "!"
+	  } // end getResult
+	</script>
+
+<link rel = "stylesheet"
+   type = "text/css"
+   href = "textBoxes.css" />
+   
 <title></title>
 
 <style type="text/css">
@@ -86,6 +107,9 @@ height:22px;
 <a href="#"><img class="smaller-image" alt="About Department of Health logo" src="http://health.hawaii.gov/about/files/2014/04/logo.png"></a>
 <h3>   </h3> 
 <h3>Site Input Worksheet</h3> 
+
+
+
 
 <div id="navbar">
 
@@ -125,11 +149,30 @@ height:22px;
 	<select id="json-two">
 		<option>Please choose from above</option>
 	</select>
-  
+   <h3>   </h3>
+   <input type = "button"
+    value = "Submit"
+    onclick = "getResult()"/>
+ <h3>   </h3>
 
-</div>
+ <form action="/action_page.php" method="get">
+  <fieldset>
+  <label>Final EALs: </label>
+   <h3>   </h3>
+ 
+	Soil (mg/kg): <input type = "text"
+    id = "txtSoil" />
+	Groundwater (ug/L): <input type = "text"
+    id = "txtGroundwater" /> 
+	Soil Vapor (ug/m^3): <input type = "text"
+    id = "txtVapor" />
+  </fieldset>
+ </form>
+ 
+ </div>
 </div> 
 </div>
+
 
 </body>
 </html>
