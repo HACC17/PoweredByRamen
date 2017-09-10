@@ -1,9 +1,9 @@
-Team Name: 
+Team Name:
 PoweredByRamen
 
 Team Members:
-*Shiho You
-*Siyuan Chen
+* Shiho You
+* Siyuan Chen
 
 About:
 Django project to recreate Hawaii Department of Health's EAL Surfer form (originally in Excel format) as a web application for the HACC event.
