@@ -9,18 +9,9 @@
 
     <script src="jquery-3.2.1.min.js"></script>
 -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 	<script>
-	window.onload = function() {
-    if (window.jQuery) {
-        // jQuery is loaded
-        alert("Yeah!");
-    } else {
-        // jQuery is not loaded
-        alert("Doesn't Work");
-    }
-}
 		$(function() {
 
 			$("#text-one").change(function() {
@@ -55,6 +46,23 @@
 
 		});
 	</script>
+
+  	 <script type = "text/javascript">
+	  // from textBoxes.html
+	  function getResult(){
+	  var LandUse = document.getElementById("LandUse");
+	  var GroundWaterUtility = document.getElementById("GroundWaterUtility");
+	  var DistanceToNearest = document.getElementById("DistanceToNearest");
+	  var json-one = document.getElementById("json-one");
+	  var json-two = document.getElementById("json-two");
+	  var txtSoil = document.getElementById("txtSoil");
+	  var txtGroundwater = document.getElementById("txtGroundwater");
+	  var txtVapor = document.getElementById("txtVapor");
+	  var name = txtName.value;
+	  txtOutput.value = "Hi there, " + name + "!"
+	  } // end getResult
+	</script>
+
 <title></title>
 
 <style type="text/css">
@@ -84,7 +92,7 @@ height:22px;
 
 <body>
 
-<h1>EAL Surfer <a href="#"><img class="smaller-image" alt="EAL Surfer logo" src="EALSurferLog.png"></a>
+<h1>EAL Surfer <a href="#"><img class="smaller-image" alt="EAL Surfer logo" src="{{ STATIC_URL }} /static/EALSurferLog.png"></a>
 </h1>
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <h2 class="red-text">Environmental Action Levels Surfer</h2>
@@ -147,7 +155,26 @@ height:22px;
     <select id="json-two">
 		<option>Please choose from above</option>
 	</select>
-    <script type="text/javascript">
+    <h3>   </h3>
+
+    <input type = "button"
+    value = "Submit"
+    onclick = "getResult()"/>
+    <h3>   </h3>
+
+    <form action="/action_page.php" method="get">
+      <fieldset>
+      <label>Final EALs: </label>
+       <h3>   </h3>
+
+        Soil (mg/kg): <input type = "text"
+        id = "txtSoil" />
+        Groundwater (ug/L): <input type = "text"
+        id = "txtGroundwater" />
+        Soil Vapor (ug/m^3): <input type = "text"
+        id = "txtVapor" />
+      </fieldset>
+    </form>
 
 </script>
 </tbody>
