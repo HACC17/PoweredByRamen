@@ -2,8 +2,8 @@
 PoweredByRamen
 
 ## Team Members:
-* Shiho You
-* Siyuan Chen
+* Shiho You - 志保
+* Siyuan Chen - 斯源
 
 ## About:
 
