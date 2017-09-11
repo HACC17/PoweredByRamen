@@ -16,7 +16,6 @@
 
 				var $dropdown = $(this);
 
-
                 var key = $dropdown.val();
                 var vals = [];
 
@@ -54,6 +53,15 @@
                         ContaminantType: $("#ContaminantType").val(),
                         ContaminantName: $("#ContaminantName").val()
                     },
+                }).done(function(returned_data){
+
+                    // This is the ajax.done() method, where you can fire events after the ajax method is complete
+
+                    // For instance, you could hide/display your add/remove button here
+                    $('input.txtSoil').val('{{ soil|safe }}');
+                    $('input.txtGroundwater').val('{{ groundWater|safe }}');
+                    $('input.txtVapor').val('{{ soilVapor|safe }}');
+
                 });
             });
         });
@@ -62,21 +70,13 @@
     <script type="text/javascript">
         // from textBoxes.html
         function getResult(){
-            var LandUse = document.getElementById("LandUse");
-            var GroundWaterUtility = document.getElementById("GroundWaterUtility");
-            var DistanceToNearest = document.getElementById("DistanceToNearest");
-            var ContaminantType = document.getElementById("ContaminantType");
-            var ContaminantName = document.getElementById("ContaminantName");
             var txtSoil = document.getElementById("txtSoil");
             var txtGroundwater = document.getElementById("txtGroundwater");
             var txtVapor = document.getElementById("txtVapor");
-            var name = txtName.value;
-            txtOutput.value = "Hi there, " + name + "!"
+            txtSoil.value = "{{ soil|safe }}"
+            txtGroundwater.value = "{{ groundWater|safe }}"
+            txtVapor.value = "{{ soilVapor|safe }}"
         } // end getResult
-
-
-
-
     </script>
 
     <title></title>
@@ -151,21 +151,16 @@
                 </select>
                 <h3></h3>
 
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit"/>
                 <h3></h3>
             </form>
-
 
             <fieldset>
                 <label>Final EALs: </label>
                 <h3></h3>
-
-                Soil (mg/kg): <input type="text"
-                                     id="txtSoil"/>
-                Groundwater (ug/L): <input type="text"
-                                           id="txtGroundwater"/>
-                Soil Vapor (ug/m^3): <input type="text"
-                                            id="txtVapor"/>
+                Soil (mg/kg): <input type="text" name="soilResult" id="txtSoil"/>
+                Groundwater (ug/L): <input type="text" name="groundWaterResult" id="txtGroundwater"/>
+                Soil Vapor (ug/m^3): <input type="text" name="soilVaporResult" id="txtVapor"/>
             </fieldset>
 
         </div>

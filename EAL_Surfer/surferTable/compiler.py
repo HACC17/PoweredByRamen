@@ -22,9 +22,29 @@ def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminant
     _inputGroundWaterConcentration = optional_inputGroundWaterConcentration
     _inputSoilGasConcentration = optional_inputSoilGasConcentration
 
-    print soilActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
-    print groundWaterActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
-    print indoorAirAndSoilGasActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
+    #TODO this decoder ring is not maintainable in the long run, create dictionary instead
+    # Needed values
+    # 46, 50, 56, 60, 68, 70, 71, 72
+    # 3, 6, 11, 14, 21, 23, 24, 25
+    soilActionLevelsList = soilActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
+    # 75, 79, 83, 87, 88, 89
+    # 0, 3, 6, 9, 10, 11
+    groundWaterActionLevelsList = groundWaterActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
+    # 99
+    # 5
+    indoorAirAndSoilGasActionLevelsList = indoorAirAndSoilGasActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
+
+    # debug statements
+    #result1 = [soilActionLevelsList[3], soilActionLevelsList[6], soilActionLevelsList[11], soilActionLevelsList[14],
+    # soilActionLevelsList[21], soilActionLevelsList[23], soilActionLevelsList[24], soilActionLevelsList[25]]
+    # debug statements
+    #result2 = [groundWaterActionLevelsList[0], groundWaterActionLevelsList[3], groundWaterActionLevelsList[6],
+    # groundWaterActionLevelsList[9], groundWaterActionLevelsList[10], groundWaterActionLevelsList[11]]
+    # result3 = indoorAirAndSoilGasActionLevelsList[5]
+
+    # return 71, 88, 99
+    return [soilActionLevelsList[24], groundWaterActionLevelsList[10], indoorAirAndSoilGasActionLevelsList[5]]
+
 
 # Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
 def soilTier1EALTablesLookUp(groundWaterUtilityInput, distanceToNearestInput):
@@ -52,6 +72,7 @@ def finalGroundWaterActionLevelsLookUp(groundWaterUtilityInput, distanceToNeares
         tempString = 'TableD_1d'
     return tempString
 
+# soil action levels logic
 def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, distanceToNearestInput):
     result = []
 
@@ -224,6 +245,7 @@ def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, dis
 
     return result
 
+# ground waster action levels logic
 def groundWaterActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, distanceToNearestInput):
     result = []
 
@@ -309,6 +331,7 @@ def groundWaterActionLevels(contaminantNameInput, landUse, groundWaterUtilityInp
 
     return result
 
+# indoor air and soil gas action levels logic
 def indoorAirAndSoilGasActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, distanceToNearestInput):
     result = []
 
