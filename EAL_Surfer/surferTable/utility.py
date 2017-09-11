@@ -19,15 +19,49 @@ def convertCASNameToChemicalName(contaminantName):
     return result[0][0]
 
 
+# Helper function to check if string is represents a float/convertible to float
+def RepresentsFloat(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
+# Helper function to return the minimum value of a list (in sig fig notations)
+def findMinFromList(inputList):
+    tempList = []
+    for val in inputList:
+        # check to make sure the val is float convertible
+        if RepresentsFloat(val):
+            tempList.append(float(val))
+    return to_precision(min(tempList), 2)
+
+
 # Helper function to look up db (translate of vlookup functionality)
 def dbLookUp(column, table_name, contaminantName):
     conn = db.connect(dbName)
     c = conn.cursor()
+    conn.text_factory = str
     c.execute('SELECT {col} FROM {tn} WHERE c1="{cn}"'. \
               format(col=column, tn=table_name, cn=contaminantName))
     result = c.fetchall()
-    return to_precision(float(result[0][0]), 2)
+    if RepresentsFloat(result[0][0]):
+        return to_precision(float(result[0][0]), 2)
+    return result[0][0]
 
+
+# Helper function to look up db (translate of vlookup functionality)
+def dbLookUpWithChemicalColumnSpecified(column, table_name, contaminantName_column, contaminantName):
+    conn = db.connect(dbName)
+    c = conn.cursor()
+    conn.text_factory = str
+    c.execute('SELECT {col} FROM {tn} WHERE {cm_c}="{cn}"'. \
+              format(col=column, tn=table_name, cm_c=contaminantName_column, cn=contaminantName))
+    result = c.fetchall()
+    if RepresentsFloat(result[0][0]):
+        return to_precision(float(result[0][0]), 2)
+    return result[0][0]
 
 # Helper function
 def to_precision(x, p):

@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from utility import *
 from surferTable import listOfChemicalNames, listOfCASNames
+from compiler import *
 
 def index(request):
     if request.method == 'GET':
@@ -20,8 +21,16 @@ def index(request):
             if contaminantType == contaminantTypeCas:
                 contaminantName = convertCASNameToChemicalName(contaminantName)
 
-            lookUpValue = dbLookUp("c3", "SummaryTableA", contaminantName)
+            # pass user inputs to compiler
+            surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName)
+
             # debug print
-            print lookUpValue
+            #lookUpValue = dbLookUp("c3", "SummaryTableA", contaminantName)
+            #print lookUpValue
+            #print soilTier1EALTablesLookUp(groundWaterUtility, distanceToNearest)
+            #print finalGroundWaterActionLevelsLookUp(groundWaterUtility, distanceToNearest)
+            #print soilActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
+            #print groundWaterActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
+            #print indoorAirAndSoilGasActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
 
     return render(request, 'index.html', {'listOfChemicalNames': listOfChemicalNames, 'listOfCASNames': listOfCASNames})
