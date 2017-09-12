@@ -1,6 +1,7 @@
 """
 Translation of compiler logic from Surfer Table Compiler Excel sheet 
 Quick implementation to get project going
+See file 'surfer_table_compiler_logic_breakdown.docx' in the resource directory (top level) for more info
 TODO rework code to make it cleaner and model driven
 """
 
