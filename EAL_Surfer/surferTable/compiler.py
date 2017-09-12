@@ -1,5 +1,7 @@
 """
-Translation of compiler logic from Surfer Table Compiler Excel sheet
+Translation of compiler logic from Surfer Table Compiler Excel sheet 
+Quick implementation to get project going
+TODO rework code to make it cleaner and model driven
 """
 
 from utility import *
