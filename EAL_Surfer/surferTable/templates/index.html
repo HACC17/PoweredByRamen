@@ -7,15 +7,9 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
 		$(function() {
-
-			$("#text-one").change(function() {
-				$("#text-two").load("textdata/" + $(this).val() + ".txt");
-			});
-
 			$("#ContaminantType").change(function() {
 
 				var $dropdown = $(this);
-
                 var key = $dropdown.val();
                 var vals = [];
 
@@ -39,45 +33,15 @@
 
 		});
 
-		$(document).ready(function () {
-            $('#myform').on('submit', function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url : $(this).attr('action'),
-                    type: "GET",
-                    data:
-                    {
-                        LandUse: $("#LandUse").val(),
-                        GroundWaterUtility: $("#GroundWaterUtility").val(),
-                        DistanceToNearest: $("#DistanceToNearest").val(),
-                        ContaminantType: $("#ContaminantType").val(),
-                        ContaminantName: $("#ContaminantName").val()
-                    },
-                }).done(function(returned_data){
-
-                    // This is the ajax.done() method, where you can fire events after the ajax method is complete
-
-                    // For instance, you could hide/display your add/remove button here
-                    $('input.txtSoil').val('{{ soil|safe }}');
-                    $('input.txtGroundwater').val('{{ groundWater|safe }}');
-                    $('input.txtVapor').val('{{ soilVapor|safe }}');
-
-                });
-            });
+		$( document ).ready(function() {
+            $('#LandUse').val('{{ landUse }}');
+            $('#GroundWaterUtility').val('{{ groundWaterUtility }}');
+            $('#DistanceToNearest').val('{{ distanceToNearest }}');
+            //$('#ContaminantType').val('{{ contaminantType }}');
+            //$('#ContaminantName').val('{{ contaminantName }}');
         });
     </script>
 
-    <script type="text/javascript">
-        // from textBoxes.html
-        function getResult(){
-            var txtSoil = document.getElementById("txtSoil");
-            var txtGroundwater = document.getElementById("txtGroundwater");
-            var txtVapor = document.getElementById("txtVapor");
-            txtSoil.value = "{{ soil|safe }}"
-            txtGroundwater.value = "{{ groundWater|safe }}"
-            txtVapor.value = "{{ soilVapor|safe }}"
-        } // end getResult
-    </script>
 
     <title></title>
 
@@ -120,49 +84,49 @@
         <div id="vertical">
             <form id="myform" action="" method="get">
                 <label>Land Use: </label>
-                <select id="LandUse">
+                <select id="LandUse" name="LandUse">
                     <option selected value="base">Please Select</option>
                     <option value="unrestricted">Unrestricted</option>
                     <option value="commercial">Commercia/Industrial Only</option>
                 </select>
                 <h3></h3>
                 <label>Ground Water Utility: </label>
-                <select id="GroundWaterUtility">
+                <select id="GroundWaterUtility" name="GroundWaterUtility">
                     <option selected value="base">Please Select</option>
                     <option value="drinking">Dringin Water Resource</option>
                     <option value="nondrinking">Nondrinking Water Resource</option>
                 </select>
                 <h3></h3>
                 <label>Distance To Nearest Surface Water Body: </label>
-                <select id="DistanceToNearest">
+                <select id="DistanceToNearest" name="DistanceToNearest">
                     <option selected value="base">Please Select</option>
                     <option value="lessthan"> < 150m</option>
                     <option value="greaterthan"> > 150m</option>
                 </select>
                 <h3></h3>
                 <label>Select Contaminant</label>
-                <select id="ContaminantType">
+                <select id="ContaminantType" name="ContaminantType">
                     <option selected value="base">Please Select</option>
                     <option value="Chemical">Chemical</option>
                     <option value="CAS">CAS</option>
                 </select>
-                <select id="ContaminantName">
+                <select id="ContaminantName" name="ContaminantName">
                     <option>Please choose from above</option>
                 </select>
                 <h3></h3>
 
-                <input type="submit" value="Submit"/>
+                <input type="submit" value="Submit" onclick="saveInput()"/>
                 <h3></h3>
             </form>
+
 
             <fieldset>
                 <label>Final EALs: </label>
                 <h3></h3>
-                Soil (mg/kg): <input type="text" name="soilResult" id="txtSoil"/>
-                Groundwater (ug/L): <input type="text" name="groundWaterResult" id="txtGroundwater"/>
-                Soil Vapor (ug/m^3): <input type="text" name="soilVaporResult" id="txtVapor"/>
+                Soil (mg/kg): <input type="text" name="soilResult" id="txtSoil" value="{{ soil }}"/>
+                Groundwater (ug/L): <input type="text" name="groundWaterResult" id="txtGroundwater" value="{{ groundWater }}"/>
+                Soil Vapor (ug/m^3): <input type="text" name="soilVaporResult" id="txtVapor" value="{{ soilVapor }}"/>
             </fieldset>
-
         </div>
     </div>
 </div>

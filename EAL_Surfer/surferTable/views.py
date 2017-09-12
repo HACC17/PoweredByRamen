@@ -9,9 +9,7 @@ from utility import *
 
 
 def index(request):
-    soil = ''
-    groundWater = ''
-    soilVapor = ''
+
 
     if request.method == 'GET':
         landUse = request.GET.get('LandUse', '')
@@ -19,7 +17,6 @@ def index(request):
         distanceToNearest = request.GET.get('DistanceToNearest', '')
         contaminantType = request.GET.get('ContaminantType', '')
         contaminantName = request.GET.get('ContaminantName', '')
-
 
         #  only do lookup if values are from the available list
         if (contaminantType == contaminantTypeCas) or (contaminantType == contaminantTypeChemical):
@@ -30,12 +27,21 @@ def index(request):
             # pass user inputs to compiler
             [soil, groundWater, soilVapor] = surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName)
 
-            #print soil
-            #print groundWater
-            #print soilVapor
+            return render(request, 'index.html', {'listOfChemicalNames': listOfChemicalNames,
+                                                  'listOfCASNames': listOfCASNames,
+                                                  'soil': soil,
+                                                  'groundWater': groundWater,
+                                                  'soilVapor': soilVapor,
+                                                  'landUse': landUse,
+                                                  'groundWaterUtility': groundWaterUtility,
+                                                  'distanceToNearest': distanceToNearest,
+                                                  'contaminantType': contaminantType,
+                                                  'contaminantName': contaminantName })
 
     return render(request, 'index.html', {'listOfChemicalNames': listOfChemicalNames,
-                                          'listOfCASNames': listOfCASNames,
-                                          'soil': soil,
-                                          'groundWater': groundWater,
-                                          'soilVapor': soilVapor})
+                                              'listOfCASNames': listOfCASNames,
+                                              'landUse': landUse,
+                                              'groundWaterUtility': groundWaterUtility,
+                                              'distanceToNearest': distanceToNearest,
+                                              'contaminantType': contaminantType,
+                                              'contaminantName': contaminantName })
