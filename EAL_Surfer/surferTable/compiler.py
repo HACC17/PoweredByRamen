@@ -43,8 +43,8 @@ def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminant
     # result3 = indoorAirAndSoilGasActionLevelsList[5]
 
     # return 71, 88, 99
-    return [soilActionLevelsList[24], groundWaterActionLevelsList[10], indoorAirAndSoilGasActionLevelsList[5]]
-
+    [soil, groundWater, soilVapor] = [soilActionLevelsList[24], groundWaterActionLevelsList[10], indoorAirAndSoilGasActionLevelsList[5]]
+    return [soil, groundWater, soilVapor]
 
 # Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
 def soilTier1EALTablesLookUp(groundWaterUtilityInput, distanceToNearestInput):
