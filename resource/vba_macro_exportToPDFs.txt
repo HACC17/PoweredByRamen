@@ -1,0 +1,31 @@
+' VBA Macro to export worksheets to individual PDF's
+
+Sub ExportToPDFs()
+' PDF Export Macro
+' Change C:\Exports\ to your folder path where you need the diles saved
+' Save Each Worksheet to a separate PDF file.
+ 
+Dim ws As Worksheet
+Dim posA As Integer
+Dim posB As Integer
+Dim posC As Integer
+
+For Each ws In Worksheets
+    
+    ws.Select
+    nm = ws.Name
+    
+    ' All TableA's, TableB's, and Table D-1's are not able to use this macro
+    posA = InStr(nm, "Table A-")
+    posB = InStr(nm, "Table B-")
+    posD = InStr(nm, "Table D-1")
+    If posA = 0 And posB = 0 And posD = 0 Then
+        ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, _
+        Filename:="C:\temp" & nm & ".pdf", _
+        Quality:=xlQualityStandard, IncludeDocProperties:=True, _
+        IgnorePrintAreas:=False, OpenAfterPublish:=False
+    End If
+
+    Next ws
+
+End Sub
