@@ -24,7 +24,13 @@ def index(request):
         groundWaterUtility = request.GET.get('GroundWaterUtility', '')
         distanceToNearest = request.GET.get('DistanceToNearest', '')
         contaminantType = request.GET.get('ContaminantType', '')
-        contaminantName = request.GET.get('ContaminantName', '')
+        contaminantName = request.GET.getlist('ContaminantName')
+		##############################################################
+        #TODO temp code, please remove once multi chem names are working
+        if contaminantName:
+            contaminantName = contaminantName[0]
+		##############################################################
+        print contaminantName
         response = {'listOfChemicalNames': listOfChemicalNames,
                     'listOfCASNames': listOfCASNames,
                     'landUse': landUse,
@@ -63,18 +69,20 @@ def index(request):
         # response = HttpResponse(content_type='application/pdf')
         # response['Content-Disposition'] = 'attachment; filename="test.pdf"'
 
-        #  only do lookup if values are from the available list
-        if (contaminantType == contaminantTypeCas) or (contaminantType == contaminantTypeChemical):
-            # convert CAS to chemical name
-            if contaminantType == contaminantTypeCas:
-                contaminantName = convertCASNameToChemicalName(contaminantName)
+        # make sure all values are filled out before computation
+        if landUse and groundWaterUtility and distanceToNearest and contaminantName:
+            #  only do lookup if values are from the available list
+            if (contaminantType == contaminantTypeCas) or (contaminantType == contaminantTypeChemical):
+                # convert CAS to chemical name
+                if contaminantType == contaminantTypeCas:
+                    contaminantName = convertCASNameToChemicalName(contaminantName)
 
             # pass user inputs to compiler logic
             [soil, groundWater, soilVapor] = surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName)
             response['soil'] = soil
             response['groundWater'] = groundWater
             response['soilVapor'] = soilVapor
-
+            print "it reached here"
             return render(request, 'index.html', response)
 
     return render(request, 'index.html', response)
