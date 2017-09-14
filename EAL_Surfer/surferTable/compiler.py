@@ -50,26 +50,26 @@ def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminant
 def soilTier1EALTablesLookUp(groundWaterUtilityInput, distanceToNearestInput):
     tempString = ''
     if groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'greaterthan':
-        tempString = 'TableA_1'
+        tempString = 'TableA1'
     elif groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'lessthan':
-        tempString = 'TableA_2'
+        tempString = 'TableA2'
     elif groundWaterUtilityInput == 'nondrinking' and distanceToNearestInput == 'greaterthan':
-        tempString = 'TableB_1'
+        tempString = 'TableB1'
     else:
-        tempString = 'TableB_2'
+        tempString = 'TableB2'
     return tempString
 
 # Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
 def finalGroundWaterActionLevelsLookUp(groundWaterUtilityInput, distanceToNearestInput):
     tempString = ''
     if groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'lessthan':
-        tempString = 'TableD_1a'
+        tempString = 'TableD1a'
     elif groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'greaterthan':
-        tempString = 'TableD_1b'
+        tempString = 'TableD1b'
     elif groundWaterUtilityInput == 'nondrinking' and distanceToNearestInput == 'lessthan':
-        tempString = 'TableD_1c'
+        tempString = 'TableD1c'
     else:
-        tempString = 'TableD_1d'
+        tempString = 'TableD1d'
     return tempString
 
 # soil action levels logic
@@ -79,9 +79,9 @@ def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, dis
     ###################
     # Direct Exposure #
     ###################
-    tableNameDirectExposureResidential = 'TableI_1'
-    tableNameDirectExposureCommercial = 'TableI_2'
-    tableNameDirectExposureConstruction = 'TableI_3'
+    tableNameDirectExposureResidential = 'TableI1'
+    tableNameDirectExposureCommercial = 'TableI2'
+    tableNameDirectExposureConstruction = 'TableI3'
     tableColumnDirectExposure = 'c2'
     de_residential = dbLookUp(tableColumnDirectExposure, tableNameDirectExposureResidential, contaminantNameInput)
     de_commercial = dbLookUp(tableColumnDirectExposure, tableNameDirectExposureCommercial, contaminantNameInput)
@@ -100,7 +100,7 @@ def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, dis
     ###################
     # Vapor Intrusion #
     ###################
-    tableNameVaporIntrusion = 'TableC_1b'
+    tableNameVaporIntrusion = 'TableC1b'
     tableColumnResidentialVaporIntrusion = 'c5'
     tableColumnCommercialVaporIntrusion = 'c6'
     vi_residential = dbLookUp(tableColumnResidentialVaporIntrusion, tableNameVaporIntrusion, contaminantNameInput)
@@ -119,7 +119,7 @@ def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, dis
     # Leaching #
     ############
     # TODO fix TableE either through csv file or parsing logic to not have an excess column 1
-    tableNameLeaching = 'TableE' # it's called TableE instead of TableE_1 in the csv file, and every column is shifted over 1
+    tableNameLeaching = 'TableE' # it's called TableE instead of TableE1 in the csv file, and every column is shifted over 1
     tableColumnDWLessThanLeaching = 'c13' # csv is c12
     tableColumnDWGreaterThanLeaching = 'c14' # csv is c13
     tableColumnNDWLessThanLeaching = 'c15' # csv is c14
@@ -165,8 +165,8 @@ def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, dis
     #######################
     # Gross Contamination #
     #######################
-    tableNameExposedSoilGrossContamination = 'TableF_2'
-    tableNameIsolatedSoilGrossContamination = 'TableF_3'
+    tableNameExposedSoilGrossContamination = 'TableF2'
+    tableNameIsolatedSoilGrossContamination = 'TableF3'
     tableColumnResidentialGrossContamination = 'c2'
     tableColumnCommercialGrossContamination = 'c3'
     gc_residentialExposed = dbLookUp(tableColumnResidentialGrossContamination, tableNameExposedSoilGrossContamination, contaminantNameInput)
@@ -252,7 +252,7 @@ def groundWaterActionLevels(contaminantNameInput, landUse, groundWaterUtilityInp
     ###########################
     # Drinking Water Toxicity #
     ###########################
-    tableNameDrinkingWaterToxicity = 'TableD_3a'
+    tableNameDrinkingWaterToxicity = 'TableD3a'
     tableColumnDrinkingWaterToxicity = 'c2'
     drinkingWaterToxicity = dbLookUp(tableColumnDrinkingWaterToxicity, tableNameDrinkingWaterToxicity, contaminantNameInput)
     result.append(drinkingWaterToxicity)
@@ -260,7 +260,7 @@ def groundWaterActionLevels(contaminantNameInput, landUse, groundWaterUtilityInp
     ###################
     # Vapor Intrusion #
     ###################
-    tableNameVaporIntrusion = 'TableC_1a'
+    tableNameVaporIntrusion = 'TableC1a'
     tableColumnResidentialVaporIntrusion = 'c5'
     tableColumnCommercialVaporIntrusion = 'c6'
     vi_residential = dbLookUp(tableColumnResidentialVaporIntrusion, tableNameVaporIntrusion, contaminantNameInput)
@@ -278,7 +278,7 @@ def groundWaterActionLevels(contaminantNameInput, landUse, groundWaterUtilityInp
     #######################
     # Aquatic Ecotoxicity #
     #######################
-    tableNameAquaticEcotoxicity = 'TableD_4a'
+    tableNameAquaticEcotoxicity = 'TableD4a'
     tableColumnResidentialAquaticEcotoxicity = 'c2'
     tableColumnCommercialAquaticEcotoxicity = 'c3'
     ae_chronic = dbLookUp(tableColumnResidentialAquaticEcotoxicity, tableNameAquaticEcotoxicity, contaminantNameInput)
@@ -296,8 +296,8 @@ def groundWaterActionLevels(contaminantNameInput, landUse, groundWaterUtilityInp
     #######################
     # Gross Contamination #
     #######################
-    tableNameDWGrossContamination = 'TableG_1'
-    tableNameNDWGrossContamination = 'TableG_2'
+    tableNameDWGrossContamination = 'TableG1'
+    tableNameNDWGrossContamination = 'TableG2'
     tableColumnGrossContamination = 'c2'
     gc_drinkingWater = dbLookUp(tableColumnGrossContamination, tableNameDWGrossContamination, contaminantNameInput)
     gc_nonDrinkingWater = dbLookUp(tableColumnGrossContamination, tableNameNDWGrossContamination, contaminantNameInput)
@@ -338,7 +338,7 @@ def indoorAirAndSoilGasActionLevels(contaminantNameInput, landUse, groundWaterUt
     ##############
     # Indoor Air #
     ##############
-    tableNameIndoorAir = 'TableC_3'
+    tableNameIndoorAir = 'TableC3'
     tableColumnResidentialIndoorAir = 'c6'
     tableColumnCommercialIndoorAir = 'c9'
     ia_residential = dbLookUp(tableColumnResidentialIndoorAir, tableNameIndoorAir, contaminantNameInput)
@@ -356,7 +356,7 @@ def indoorAirAndSoilGasActionLevels(contaminantNameInput, landUse, groundWaterUt
     ############
     # Soil Gas #
     ############
-    tableNameSoilGas = 'TableC_2'
+    tableNameSoilGas = 'TableC2'
     tableColumnResidentialSoilGas = 'c4'
     tableColumnCommercialSoilGas = 'c7'
     sg_residential = dbLookUp(tableColumnResidentialSoilGas, tableNameSoilGas, contaminantNameInput)
