@@ -44,16 +44,6 @@ def dbLookUpWithChemicalColumnSpecified(column, table_name, contaminantName_colu
         return to_precision(float(result), 2)
     return result
 
-    conn = db.connect(dbName)
-    c = conn.cursor()
-    conn.text_factory = str
-    c.execute('SELECT {col} FROM {tn} WHERE {cm_c}="{cn}"'. \
-              format(col=column, tn=table_name, cm_c=contaminantName_column, cn=contaminantName))
-    result = c.fetchall()
-    if RepresentsFloat(result[0][0]):
-        return to_precision(float(result[0][0]), 2)
-    return result[0][0]
-
 	
 # Helper function to check if string is represents a float/convertible to float
 def RepresentsFloat(s):
