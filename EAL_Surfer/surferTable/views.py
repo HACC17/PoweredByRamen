@@ -40,11 +40,11 @@ def index(request):
             'margin-top': '0.35in',
             'margin-right': '0.25in',
             'margin-bottom': '0.25in',
-            'margin-left': '0.55in',
+            'margin-left': '0.30in',
             'disable-smart-shrinking': ''
         }
-        pdfkit.from_file('surfertable/templates/chemical_summary_template.html', 'surfertable/static/hello.pdf', configuration = config, options = options)
-        response['pdfFile'] = 'hello.pdf'
+        pdfkit.from_file('surfertable/templates/chemical_summary_template.html', 'surfertable/static/test.pdf', configuration = config, options = options)
+        response['pdfFile'] = 'test.pdf'
         # response = HttpResponse(content_type='application/pdf')
         # response['Content-Disposition'] = 'attachment; filename="test.pdf"'
 
