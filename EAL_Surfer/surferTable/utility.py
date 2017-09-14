@@ -1,24 +1,50 @@
 import sqlite3 as db
 import math
+from django.apps import apps
 
 # utility vars
 dbName = 'EAL_SURFER_TABLES_DB.sqlite3'
+appName = 'surferTable'
 configTableName = 'allchemicals'
+# use in view file
 contaminantTypeCas = 'CAS'
 contaminantTypeChemical = 'Chemical'
 
 
 # Helper function to look up mapping of CAS to chemical name
 def convertCASNameToChemicalName(contaminantName):
-    conn = db.connect(dbName)
-    c = conn.cursor()
-    conn.text_factory = str
-    c.execute('SELECT c3 FROM ' + configTableName + ' WHERE c2="{cn}"'. \
-              format(cn=contaminantName))
-    result = c.fetchall()
-    return result[0][0]
+
+    model = apps.get_model(appName, configTableName)
+    chemicalName = model.objects.values_list('c3', flat=True).filter(c2__exact=contaminantName)
+    return chemicalName[0]
+
+	
+# Helper function to look up db (translate of vlookup functionality)
+def dbLookUp(column, table_name, contaminantName):
+
+    model = apps.get_model(appName, table_name)
+	# SELECT {column} FROM {table_name} WHERE c1 = {contaminantName}
+    result = model.objects.values_list(column, flat=True).filter(c1__exact=contaminantName)
+    result = result[0] # return as list of one
+    if RepresentsFloat(result):
+        return to_precision(float(result), 2)
+    return result
 
 
+# Helper function to look up db (translate of vlookup functionality)
+def dbLookUpWithChemicalColumnSpecified(column, table_name, contaminantName_column, contaminantName):
+
+    columnToFilter = contaminantName_column+'__exact'
+    model = apps.get_model(appName, table_name)
+	# SELECT {column} FROM {table_name} WHERE {contaminantName_colun} = {contaminantName}
+	# using parameter '**{ columnToFilter: contaminantName } to dynamically filter out results
+    result = model.objects.values_list(column, flat=True).filter(**{ columnToFilter: contaminantName })
+    result = result[0] # return as list of one
+    if RepresentsFloat(result):
+        return to_precision(float(result), 2)
+    return result
+
+	
 # Helper function to check if string is represents a float/convertible to float
 def RepresentsFloat(s):
     try:
@@ -36,32 +62,6 @@ def findMinFromList(inputList):
         if RepresentsFloat(val):
             tempList.append(float(val))
     return to_precision(min(tempList), 2)
-
-
-# Helper function to look up db (translate of vlookup functionality)
-def dbLookUp(column, table_name, contaminantName):
-    conn = db.connect(dbName)
-    c = conn.cursor()
-    conn.text_factory = str
-    c.execute('SELECT {col} FROM {tn} WHERE c1="{cn}"'. \
-              format(col=column, tn=table_name, cn=contaminantName))
-    result = c.fetchall()
-    if RepresentsFloat(result[0][0]):
-        return to_precision(float(result[0][0]), 2)
-    return result[0][0]
-
-
-# Helper function to look up db (translate of vlookup functionality)
-def dbLookUpWithChemicalColumnSpecified(column, table_name, contaminantName_column, contaminantName):
-    conn = db.connect(dbName)
-    c = conn.cursor()
-    conn.text_factory = str
-    c.execute('SELECT {col} FROM {tn} WHERE {cm_c}="{cn}"'. \
-              format(col=column, tn=table_name, cm_c=contaminantName_column, cn=contaminantName))
-    result = c.fetchall()
-    if RepresentsFloat(result[0][0]):
-        return to_precision(float(result[0][0]), 2)
-    return result[0][0]
 
 # Helper function
 def to_precision(x, p):
