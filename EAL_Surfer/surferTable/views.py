@@ -8,6 +8,7 @@ from utility import *
 from surferTable.models import Allchemicals
 import pdfkit
 from django.templatetags.static import static
+import os
 
 def index(request):
 
@@ -32,18 +33,32 @@ def index(request):
                     'contaminantType': contaminantType,
                     'contaminantName': contaminantName }
 
-        # package would not install correctly, installed manually and set explicit path
-        config = pdfkit.configuration(wkhtmltopdf="/usr/local/bin/wkhtmltopdf")
-        options = {
-            'quiet': '',
-            'page-size': 'B7',
-            'margin-top': '0.35in',
-            'margin-right': '0.25in',
-            'margin-bottom': '0.25in',
-            'margin-left': '0.30in',
-            'disable-smart-shrinking': ''
-        }
-        pdfkit.from_file('surfertable/templates/chemical_summary_template.html', 'surfertable/static/test.pdf', configuration = config, options = options)
+        # Windows and *nix machines behave differently
+        if os.name != 'nt':
+            # package would not install correctly, installed manually and set explicit path
+            config = pdfkit.configuration(wkhtmltopdf="/usr/local/bin/wkhtmltopdf")
+            options = {
+                'quiet': '',
+                'page-size': 'B7',
+                'margin-top': '0.35in',
+                'margin-right': '0.25in',
+                'margin-bottom': '0.25in',
+                'margin-left': '0.30in',
+                'disable-smart-shrinking': ''
+            }
+            pdfkit.from_file('surfertable/templates/chemical_summary_template.html', 'surfertable/static/test.pdf', configuration = config, options = options)
+        else:
+            options = {
+                'quiet': '',
+                'page-size': 'B4',
+                'margin-top': '0.45in',
+                'margin-right': '0.75in',
+                'margin-bottom': '0.75in',
+                'margin-left': '1.00in',
+                'disable-smart-shrinking': ''
+            }
+            pdfkit.from_file('surfertable/templates/surfer_report_template.html', 'surfertable/static/test.pdf', options = options)
+
         response['pdfFile'] = 'test.pdf'
         # response = HttpResponse(content_type='application/pdf')
         # response['Content-Disposition'] = 'attachment; filename="test.pdf"'
