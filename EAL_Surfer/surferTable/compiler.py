@@ -43,17 +43,17 @@ def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminant
     groundWaterActionLevelsList = groundWaterActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
     indoorAirAndSoilGasActionLevelsList = indoorAirAndSoilGasActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
 	
-    # return 71, 88, 99
     [contaminantNameConvert, landUseConvert, groundWaterUtilityConvert, distanceToNearestConvert] = selectedSiteScenarioConvert(contaminantName, landUse, groundWaterUtility, distanceToNearest)
     surfReportTemplateList = findSurfReportTemplateReplaceList(contaminantNameConvert, landUseConvert, groundWaterUtilityConvert, distanceToNearestConvert,
                                                                 soilActionLevelsList, groundWaterActionLevelsList, indoorAirAndSoilGasActionLevelsList)
 	# replace all '' with '-' to format better
     surfReportTemplateList = [element or '-' for element in surfReportTemplateList]
-
     return surfReportTemplateList
+	
+    # return column 71, 88, 99
     #[soil, groundWater, soilVapor] = [soilActionLevelsList[24], groundWaterActionLevelsList[10], indoorAirAndSoilGasActionLevelsList[5]]
     #return [soil, groundWater, soilVapor]
-
+	
 #TODO this decoder ring is not maintainable in the long run, create dictionary instead
 # Needed values, excel line number to list index number
 # soilActionLevelsList
@@ -117,6 +117,59 @@ def findSurfReportTemplateReplaceList(contaminantName, landUse, groundWaterUtili
             final_soil_basis, drink_water, dwhazard, dwtable, v_emission_two, ve2hazard, ve2table, aquatic_ecotoxicity, aehazard, aetable, gross_contamination, gc2hazard, 
             gc2table, final_ground_tier1, final_ground_basis, shallow_soil, shhazard, shtable, indoor_air, iahazard, iatable]
 
+# these variable names are map to the chemicalSummaryTemplateList found in utility file
+def findChemicalSummaryTemplateReplaceList(contaminantName, landUse, groundWaterUtility, distanceToNearest, 
+                                      soilActionLevelsList, groundWaterActionLevelsList, indoorAirAndSoilGasActionLevelsList):
+    # Soil Environmental Hazards
+    direct_exposure = soilActionLevelsList[3]
+    dehazard = '-'
+    detable = 'Table I-1'
+    vapor_emission = soilActionLevelsList[6]
+    vehazard = '-'
+    vetable = 'Table C-1b'
+    terrestrial_ecotoxicity = soilActionLevelsList[14]
+    tehazard = '-'
+    tetable = 'Table L'
+    gros_contamination = soilActionLevelsList[21]
+    gchazard = '-'
+    gctable = 'Table F-2'
+    leach_threat = soilActionLevelsList[11]
+    lthazard = '-'
+    lttable  = 'Table E-1'
+    background_tier1 = soilActionLevelsList[23]
+    bthazard = ''
+    final_soil_tier1 = soilActionLevelsList[24]
+    final_soil_basis = soilActionLevelsList[25]
+    # Groundwater Environmental Hazards     
+    drink_water = groundWaterActionLevelsList[0]
+    dwhazard = '-'
+    dwtable = 'Table D-1a'
+    v_emission_two = groundWaterActionLevelsList[3]
+    ve2hazard = '-'
+    ve2table = 'Table C-1a'
+    aquatic_ecotoxicity = groundWaterActionLevelsList[6]
+    aehazard = '-'
+    aetable = 'Table D-4a'
+    gross_contamination = groundWaterActionLevelsList[9]
+    gc2hazard = '-'
+    gc2table = 'Table G-1'
+    final_ground_tier1 = findMinFromList([drink_water, v_emission_two, aquatic_ecotoxicity, gross_contamination])
+    final_ground_basis = groundWaterActionLevelsList[11]
+    # Other Tier 1 EALs     
+    shallow_soil = indoorAirAndSoilGasActionLevelsList[5]
+    shhazard = '-'
+    shtable = 'Table C-2'
+    indoor_air = indoorAirAndSoilGasActionLevelsList[2]
+    iahazard = '-'
+    iatable = 'Table C-3'
+	
+    return [_site_name, _site_address1, _site_address2, _site_address3, _site_id, _date_of_search, landUse, groundWaterUtility, distanceToNearest, contaminantName,
+            _inputSoilConcentration, _inputGroundWaterConcentration, _inputSoilGasConcentration, direct_exposure, dehazard, detable, vapor_emission, vehazard, vetable, 
+            terrestrial_ecotoxicity, tehazard, tetable, gros_contamination, gchazard, gctable, leach_threat, lthazard, lttable, background_tier1, bthazard, final_soil_tier1, 
+            final_soil_basis, drink_water, dwhazard, dwtable, v_emission_two, ve2hazard, ve2table, aquatic_ecotoxicity, aehazard, aetable, gross_contamination, gc2hazard, 
+            gc2table, final_ground_tier1, final_ground_basis, shallow_soil, shhazard, shtable, indoor_air, iahazard, iatable]
+
+			
 # Scrub and convert user input for selected site values
 def selectedSiteScenarioConvert(contaminantName, landUse, groundWaterUtility, distanceToNearest):
     contaminantNameConvert = contaminantName.encode('utf-8')
