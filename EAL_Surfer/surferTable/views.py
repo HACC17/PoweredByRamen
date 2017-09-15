@@ -55,8 +55,9 @@ def index(request):
             response['soil'] = 1
             response['groundWater'] = 2
             response['soilVapor'] = 3
-
-            replace_template('tempfile', 'surfer_report_template.html', 1, surferReoportrtTemplateList, surfReportTemplateList)
+			# template list from utility file
+            print surfReportTemplateList
+            replace_template('tempfile', 'chemical_summary_template.html', 1, chemicalSummaryTemplateList, surfReportTemplateList)
             convertHtmlToPDF('tempfile1.html', 'test.pdf') 
             response['pdfFile'] = 'test.pdf'
                         

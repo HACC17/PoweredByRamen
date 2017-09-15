@@ -71,35 +71,6 @@ def replace_template(newFileName, templateFile, iteration, findList, replaceList
     ifile.close()
     ofile.close()
 
-def modify_file(filename, iteration):
-
-    newfile = 'surfertable/templates/' + filename + str(iteration) +'.html'
-    #Create temporary file read/write
-    t = tempfile.NamedTemporaryFile(mode="r+")
-    
-    #Open input file read-only
-    i = open('surfertable/templates/chemical_summary_template.html', 'r')
-    #Copy input file to temporary file, modifying as we go
-    for line in i:
-        if 'ps_v' in line:
-            line = line.replace('ps_v', 'siyuan')
-        if 'molecular_weight' in line:
-            line = line.replace('molecular_weight', '0.001')    
-        t.write(line)
-
-    i.close() #Close input file
-
-    t.seek(0) #Rewind temporary file to beginning
-
-    o = open(newfile, "w")  #save to new file--writable
-
-    #Overwriting original file with temporary file contents          
-    for line in t:
-       o.write(line)  
-
-    t.close() #Close temporary file, will cause it to be deleted
-
-
 # Helper function to look up mapping of CAS to chemical name
 def convertCASNameToChemicalName(contaminantName):
 
@@ -107,6 +78,16 @@ def convertCASNameToChemicalName(contaminantName):
     chemicalName = model.objects.values_list('c3', flat=True).filter(c2__exact=contaminantName)
     return chemicalName[0]
 
+# Helper function to look up db (translate of vlookup functionality)
+def configLookUp(column, contaminantName):
+    model = apps.get_model(appName, configTableName)
+    # SELECT {column} FROM {configTableName} WHERE c1 = {contaminantName}
+    result = model.objects.values_list(column, flat=True).filter(c3__exact=contaminantName)
+    result = result[0]
+    if RepresentsFloat(result):
+        return to_precision(float(result), 2)
+    return result	
+	
     
 # Helper function to look up db (translate of vlookup functionality)
 def dbLookUp(column, table_name, contaminantName):
