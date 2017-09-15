@@ -825,6 +825,27 @@ class Tablei3(models.Model):
         managed = False
         db_table = 'TableI_3'
 
+class Tablej(models.Model):
+    c1 = models.TextField(primary_key=True, blank=True, null=False)  # This field type is a guess.
+    c2 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c3 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c4 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c9 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c10 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c11 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c12 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c13 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c14 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c15 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c16 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'TableJ'
 
 class Tablek(models.Model):
     c1 = models.TextField(primary_key=True, blank=True, null=False)  # This field type is a guess.

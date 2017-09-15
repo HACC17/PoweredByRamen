@@ -51,7 +51,7 @@ def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminant
     
     chemicalSummaryTemplateList = findChemicalSummaryTemplateReplaceList(contaminantNameConvert, landUseConvert,
                                                                 soilActionLevelsList, groundWaterActionLevelsList, indoorAirAndSoilGasActionLevelsList)
-	# make sure all values are encoded utf-8, due to the way data are stored in sqlite															
+    # make sure all values are encoded utf-8, due to the way data are stored in sqlite                                                          
     chemicalSummaryTemplateList = [element.encode('utf-8') for element in chemicalSummaryTemplateList]
     return chemicalSummaryTemplateList
 
@@ -162,8 +162,8 @@ def findChemicalSummaryTemplateReplaceList(contaminantName, landUse,
     tableColumnDAir = 'c7'
     tableColumnDWater = 'c8'
     tableColumnSWater = 'c9'
-    tableColumnHLCAtm = 'c10'
-    tableColumnHLCUnit = 'c11'
+    tableColumnHLCAtm = 'c11'
+    tableColumnHLCUnit = 'c12'
     
     molecular_weight = dbLookUp(tableColumnMolecularWeight, tableNameFateAndTransportInfo, contaminantName)
 
@@ -174,10 +174,10 @@ def findChemicalSummaryTemplateReplaceList(contaminantName, landUse,
 
     tempPSS = dbLookUp(tableColumnPSS, tableNameFateAndTransportInfo, contaminantName)
     ps_s = 'gas'
-    if tempPSV == 'S':
+    if tempPSS == 'S':
         ps_s = 'solid'
-    if tempPSV == 'G':
-        ps_s = 'gas'
+    elif tempPSS == 'L':
+        ps_s = 'liquid'
         
     organic_carbon = dbLookUp(tableColumnOCPC, tableNameFateAndTransportInfo, contaminantName)
     diff_in_air = dbLookUp(tableColumnDAir, tableNameFateAndTransportInfo, contaminantName)
@@ -203,7 +203,7 @@ def findChemicalSummaryTemplateReplaceList(contaminantName, landUse,
     tableColumnResp = 'c14'
     tableColumnSkin = 'c15'
     tableColumnOther = 'c16'
-    '''
+
     health_carc = checkTargetOrgansAndHealthEffect(contaminantName, tableNamePotentialHealth, tableColumnCarc)
     health_muta = checkTargetOrgansAndHealthEffect(contaminantName, tableNamePotentialHealth, tableColumnMuta)
     health_alim = checkTargetOrgansAndHealthEffect(contaminantName, tableNamePotentialHealth, tableColumnAlim)
@@ -219,24 +219,7 @@ def findChemicalSummaryTemplateReplaceList(contaminantName, landUse,
     health_resp = checkTargetOrgansAndHealthEffect(contaminantName, tableNamePotentialHealth, tableColumnResp)
     health_skin = checkTargetOrgansAndHealthEffect(contaminantName, tableNamePotentialHealth, tableColumnSkin)
     health_other = checkTargetOrgansAndHealthEffect(contaminantName, tableNamePotentialHealth, tableColumnOther)
-    '''
-    
-    health_carc = 'X'
-    health_muta = 'X'
-    health_alim = 'X'
-    health_card = 'X'
-    health_deve = 'X'
-    health_endo = 'X'
-    health_eye = 'X'
-    health_hema = 'X'
-    health_immu = 'X'
-    health_kidn = 'X'
-    health_nerv = 'X'
-    health_repr = 'X'
-    health_resp = 'X'
-    health_skin = 'X'
-    health_other = 'X'
-    
+
     return [contaminantName, cancer_slope, cancer_inha, refer_dose_oral, refer_dose_inha, gastr_intest, skin_absorb, 
             target_excess, target_hazard, fresh_chronic, marine_chronic, estuary_chronic, fresh_acute, marine_acute, 
             estruary_acute, bio_goal, molecular_weight, ps_v, ps_s, organic_carbon, diff_in_air, diff_in_water, 
