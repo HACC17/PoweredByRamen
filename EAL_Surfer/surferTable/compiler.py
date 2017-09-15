@@ -11,44 +11,126 @@ _landUse = ''
 _groundWaterUtility = ''
 _chemicalSelected = ''
 _distanceToNearestSurfaceWaterBody = ''
-_inputSoilConcentration = ''
-_inputGroundWaterConcentration = ''
-_inputSoilGasConcentration = ''
+_inputSoilConcentration = '-'
+_inputGroundWaterConcentration = '-'
+_inputSoilGasConcentration = '-'
+_site_name = '' 
+_site_address1 = ''
+_site_address2 = ''
+_site_address3 = ''
+_site_id = ''
+_date_of_search = ''
 
 def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName,
-                     optional_inputSoilConcentration=0, optional_inputGroundWaterConcentration=0, optional_inputSoilGasConcentration=0):
+                     optional_inputSoilConcentration=0, optional_inputGroundWaterConcentration=0, optional_inputSoilGasConcentration=0,
+                     optional_site_name=0, optional_site_address1=0, optional_site_address2=0, 
+                     optional_site_address3=0, optional_site_id=0, optional_date_of_search=0):
     _landUse = landUse
     _groundWaterUtility = groundWaterUtility
     _chemicalSelected = contaminantName
     _distanceToNearestSurfaceWaterBody = distanceToNearest
-    _inputSoilConcentration = optional_inputSoilConcentration
-    _inputGroundWaterConcentration = optional_inputGroundWaterConcentration
-    _inputSoilGasConcentration = optional_inputSoilGasConcentration
-
-    #TODO this decoder ring is not maintainable in the long run, create dictionary instead
-    # Needed values
-    # 46, 50, 56, 60, 68, 70, 71, 72
-    # 3, 6, 11, 14, 21, 23, 24, 25
+    #_inputSoilConcentration = optional_inputSoilConcentration
+    #_inputGroundWaterConcentration = optional_inputGroundWaterConcentration
+    #_inputSoilGasConcentration = optional_inputSoilGasConcentration
+    #_site_name = optional_site_name
+    #_site_address1 = optional_site_address1
+    #_site_address2 = optional_site_address2
+    #_site_address3 = optional_site_address3
+    #_site_id = optional_site_id
+    #_date_of_search = optional_date_of_search
+    
     soilActionLevelsList = soilActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
-    # 75, 79, 83, 87, 88, 89
-    # 0, 3, 6, 9, 10, 11
     groundWaterActionLevelsList = groundWaterActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
-    # 99
-    # 5
     indoorAirAndSoilGasActionLevelsList = indoorAirAndSoilGasActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
-
-    # debug statements
-    #result1 = [soilActionLevelsList[3], soilActionLevelsList[6], soilActionLevelsList[11], soilActionLevelsList[14],
-    # soilActionLevelsList[21], soilActionLevelsList[23], soilActionLevelsList[24], soilActionLevelsList[25]]
-    # debug statements
-    #result2 = [groundWaterActionLevelsList[0], groundWaterActionLevelsList[3], groundWaterActionLevelsList[6],
-    # groundWaterActionLevelsList[9], groundWaterActionLevelsList[10], groundWaterActionLevelsList[11]]
-    # result3 = indoorAirAndSoilGasActionLevelsList[5]
-
+	
     # return 71, 88, 99
-    [soil, groundWater, soilVapor] = [soilActionLevelsList[24], groundWaterActionLevelsList[10], indoorAirAndSoilGasActionLevelsList[5]]
-    return [soil, groundWater, soilVapor]
+    [contaminantNameConvert, landUseConvert, groundWaterUtilityConvert, distanceToNearestConvert] = selectedSiteScenarioConvert(contaminantName, landUse, groundWaterUtility, distanceToNearest)
+    surfReportTemplateList = findSurfReportTemplateReplaceList(contaminantNameConvert, landUseConvert, groundWaterUtilityConvert, distanceToNearestConvert,
+                                                                soilActionLevelsList, groundWaterActionLevelsList, indoorAirAndSoilGasActionLevelsList)
+	# replace all '' with '-' to format better
+    surfReportTemplateList = [element or '-' for element in surfReportTemplateList]
 
+    return surfReportTemplateList
+    #[soil, groundWater, soilVapor] = [soilActionLevelsList[24], groundWaterActionLevelsList[10], indoorAirAndSoilGasActionLevelsList[5]]
+    #return [soil, groundWater, soilVapor]
+
+#TODO this decoder ring is not maintainable in the long run, create dictionary instead
+# Needed values, excel line number to list index number
+# soilActionLevelsList
+# 46, 50, 56, 60, 68, 70, 71, 72
+# 3, 6, 11, 14, 21, 23, 24, 25
+# groundWaterActionLevelsList
+# 75, 79, 83, 87, 88, 89
+# 0, 3, 6, 9, 10, 11
+# indoorAirAndSoilGasActionLevelsList
+# 95, 99
+# 2, 5
+# these variable names are map to the surferReoportrtTemplateList found in utility file
+def findSurfReportTemplateReplaceList(contaminantName, landUse, groundWaterUtility, distanceToNearest, 
+                                      soilActionLevelsList, groundWaterActionLevelsList, indoorAirAndSoilGasActionLevelsList):
+    # Soil Environmental Hazards
+    direct_exposure = soilActionLevelsList[3]
+    dehazard = '-'
+    detable = 'Table I-1'
+    vapor_emission = soilActionLevelsList[6]
+    vehazard = '-'
+    vetable = 'Table C-1b'
+    terrestrial_ecotoxicity = soilActionLevelsList[14]
+    tehazard = '-'
+    tetable = 'Table L'
+    gros_contamination = soilActionLevelsList[21]
+    gchazard = '-'
+    gctable = 'Table F-2'
+    leach_threat = soilActionLevelsList[11]
+    lthazard = '-'
+    lttable  = 'Table E-1'
+    background_tier1 = soilActionLevelsList[23]
+    bthazard = ''
+    final_soil_tier1 = soilActionLevelsList[24]
+    final_soil_basis = soilActionLevelsList[25]
+    # Groundwater Environmental Hazards     
+    drink_water = groundWaterActionLevelsList[0]
+    dwhazard = '-'
+    dwtable = 'Table D-1a'
+    v_emission_two = groundWaterActionLevelsList[3]
+    ve2hazard = '-'
+    ve2table = 'Table C-1a'
+    aquatic_ecotoxicity = groundWaterActionLevelsList[6]
+    aehazard = '-'
+    aetable = 'Table D-4a'
+    gross_contamination = groundWaterActionLevelsList[9]
+    gc2hazard = '-'
+    gc2table = 'Table G-1'
+    final_ground_tier1 = findMinFromList([drink_water, v_emission_two, aquatic_ecotoxicity, gross_contamination])
+    final_ground_basis = groundWaterActionLevelsList[11]
+    # Other Tier 1 EALs     
+    shallow_soil = indoorAirAndSoilGasActionLevelsList[5]
+    shhazard = '-'
+    shtable = 'Table C-2'
+    indoor_air = indoorAirAndSoilGasActionLevelsList[2]
+    iahazard = '-'
+    iatable = 'Table C-3'
+	
+    return [_site_name, _site_address1, _site_address2, _site_address3, _site_id, _date_of_search, landUse, groundWaterUtility, distanceToNearest, contaminantName,
+            _inputSoilConcentration, _inputGroundWaterConcentration, _inputSoilGasConcentration, direct_exposure, dehazard, detable, vapor_emission, vehazard, vetable, 
+            terrestrial_ecotoxicity, tehazard, tetable, gros_contamination, gchazard, gctable, leach_threat, lthazard, lttable, background_tier1, bthazard, final_soil_tier1, 
+            final_soil_basis, drink_water, dwhazard, dwtable, v_emission_two, ve2hazard, ve2table, aquatic_ecotoxicity, aehazard, aetable, gross_contamination, gc2hazard, 
+            gc2table, final_ground_tier1, final_ground_basis, shallow_soil, shhazard, shtable, indoor_air, iahazard, iatable]
+
+# Scrub and convert user input for selected site values
+def selectedSiteScenarioConvert(contaminantName, landUse, groundWaterUtility, distanceToNearest):
+    contaminantNameConvert = contaminantName.encode('utf-8')
+    landUseConvert = 'Commercial/Industrial Only'
+    groundWaterUtilityConvert = 'Nondrinking Water Resource'
+    distanceToNearestConvert = '> 150m'
+    if landUse == 'unrestricted':
+        landUseConvert = 'Unrestricted'
+    if groundWaterUtility == 'drinking':
+        groundWaterUtilityConvert = 'Drinking Water Resource'
+    if distanceToNearest == 'lessthan':
+        distanceToNearestConvert = '< 150m'
+    return [contaminantNameConvert, landUseConvert, groundWaterUtilityConvert, distanceToNearestConvert]
+                
 # Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
 def soilTier1EALTablesLookUp(groundWaterUtilityInput, distanceToNearestInput):
     tempString = ''
@@ -209,7 +291,7 @@ def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, dis
     tableColumnNestedBackground = 'c5'
     chemicalCode = dbLookUpWithChemicalColumnSpecified(tableColumnBackground, tableNameBackGround, chemicalColumnInBackGroundTable, contaminantNameInput)
     background = ''
-    if chemicalCode == '2':
+    if chemicalCode == '2.0':
         backgroundValue = dbLookUp(tableColumnNestedBackground, tableNameNestedBackGround, contaminantNameInput)
         if backgroundValue == '':
             background = '?'
