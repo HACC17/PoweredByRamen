@@ -92,178 +92,6 @@ class Tablea2(models.Model):
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c9 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c10 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c11 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c12 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c13 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c14 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c15 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c16 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c17 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c18 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c19 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c20 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c21 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c22 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c23 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c24 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c25 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c26 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c27 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c28 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c29 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c30 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c31 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c32 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c33 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c34 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c35 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c36 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c37 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c38 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c39 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c40 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c41 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c42 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c43 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c44 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c45 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c46 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c47 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c48 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c49 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c50 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c51 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c52 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c53 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c54 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c55 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c56 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c57 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c58 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c59 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c60 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c61 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c62 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c63 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c64 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c65 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c66 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c67 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c68 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c69 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c70 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c71 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c72 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c73 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c74 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c75 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c76 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c77 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c78 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c79 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c80 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c81 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c82 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c83 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c84 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c85 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c86 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c87 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c88 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c89 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c90 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c91 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c92 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c93 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c94 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c95 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c96 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c97 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c98 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c99 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c100 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c101 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c102 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c103 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c104 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c105 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c106 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c107 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c108 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c109 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c110 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c111 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c112 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c113 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c114 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c115 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c116 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c117 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c118 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c119 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c120 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c121 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c122 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c123 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c124 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c125 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c126 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c127 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c128 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c129 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c130 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c131 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c132 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c133 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c134 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c135 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c136 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c137 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c138 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c139 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c140 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c141 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c142 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c143 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c144 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c145 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c146 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c147 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c148 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c149 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c150 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c151 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c152 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c153 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c154 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c155 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c156 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c157 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c158 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c159 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c160 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c161 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c162 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c163 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c164 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c165 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c166 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c167 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c168 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c169 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c170 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c171 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c172 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c173 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c174 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c175 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c176 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c177 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c178 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c179 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c180 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c181 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
     class Meta:
         managed = False
@@ -825,6 +653,27 @@ class Tablei3(models.Model):
         managed = False
         db_table = 'TableI_3'
 
+class Tablej(models.Model):
+    c1 = models.TextField(primary_key=True, blank=True, null=False)  # This field type is a guess.
+    c2 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c3 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c4 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c9 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c10 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c11 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c12 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c13 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c14 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c15 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c16 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'TableJ'
 
 class Tablek(models.Model):
     c1 = models.TextField(primary_key=True, blank=True, null=False)  # This field type is a guess.
@@ -853,9 +702,9 @@ class Tablel(models.Model):
 
 
 class Allchemicals(models.Model):
-    c1 = models.TextField(primary_key=True, blank=True, null=False)  # This field type is a guess.
+    c1 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c2 = models.TextField(blank=True, null=True)  # This field type is a guess.
-    c3 = models.TextField(blank=True, null=True)  # This field type is a guess.
+    c3 = models.TextField(primary_key=True, blank=True, null=False)  # This field type is a guess.
     c4 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.

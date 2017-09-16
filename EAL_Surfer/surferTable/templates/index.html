@@ -34,15 +34,48 @@
 		});
 
 		$( document ).ready(function() {
+			$('#site_name').val('{{ siteName }}');
+			$('#site_address1').val('{{ siteaddress1 }}');
+			$('#site_address2').val('{{ siteaddress2 }}');
+			$('#site_address3').val('{{ siteaddress3 }}');
+			$('#site_id').val('{{ siteId }}');
+			$('#site_name').val('{{ siteName }}');
+			//$('#date_of_search').val('(( dateofsearch }}');
             $('#LandUse').val('{{ landUse }}');
             $('#GroundWaterUtility').val('{{ groundWaterUtility }}');
             $('#DistanceToNearest').val('{{ distanceToNearest }}');
             //$('#ContaminantType').val('{{ contaminantType }}');
             //$('#ContaminantName').val('{{ contaminantName }}');
+			
+			// Get the element with id="defaultOpen" and click on it
+			document.getElementById("defaultOpen").click();
         });
+	
+		$(function () {
+			$('#ContaminantName').multiselect({
+				includeSelectAllOption: true
+			});
+		});
+		
+		
+		function openCity(evt, cityName) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(cityName).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+
     </script>
 
-    <title>Surfer Table App</title>
+
+    <title></title>
 
     <style type="text/css">
         #navbar #country-select {
@@ -63,69 +96,147 @@
             width: 188px;
             height:22px;
         }
+
+		#myform #ContaminantName {
+			width: 350px;
+            height:300px;
+		}
+		
+		/* Style the tab */
+		div.tab {
+			overflow: hidden;
+			border: 1px solid #ccc;
+			background-color: #f1f1f1;
+		}
+
+		/* Style the buttons inside the tab */
+		div.tab button {
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			transition: 0.3s;
+		}
+
+		/* Change background color of buttons on hover */
+		div.tab button:hover {
+			background-color: #ddd;
+		}
+
+		/* Create an active/current tablink class */
+		div.tab button.active {
+			background-color: #ccc;
+		}
+
+		/* Style the tab content */
+		.tabcontent {
+			display: none;
+			padding: 6px 12px;
+			//border: 1px solid #ccc;
+			border-top: none;
+		}
     </style>
 </head>
 
 <body>
-	<h1>EAL Surfer <a href="#"><img class="smaller-image" alt="EAL Surfer logo" src="{{ STATIC_URL }} /static/EALSurferLog.png"></a></h1>
-	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-	<h2 class="red-text">Environmental Action Levels Surfer</h2>
-	<h3>Hawaii DOH </h3> <a href="#"><img class="smaller-image" alt="About Department of Health logo" src="http://health.hawaii.gov/about/files/2014/04/logo.png"></a>
-	<h3></h3>
-	<h3>Site Input Worksheet</h3>
-	<div id="navbar">
 
-		<div id="country-select">
+<h1>EAL Surfer <a href="#"><img class="smaller-image" alt="EAL Surfer logo" src="{{ STATIC_URL }} /static/EALSurferLog.png"></a></h1>
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<h2 class="red-text">Environmental Action Levels Surfer</h2>
+<h3>Hawaii DOH </h3> <a href="#"><img class="smaller-image" alt="About Department of Health logo" src="http://health.hawaii.gov/about/files/2014/04/logo.png"></a>
+<h3></h3>
+<h3>Site Input Worksheet</h3>
+<div id="navbar">
 
-			<div id="vertical">
-				<form id="myform" action="" method="get">
-					<label>Land Use: </label>
-					<select id="LandUse" name="LandUse">
-						<option selected value="base">Please Select</option>
-						<option value="unrestricted">Unrestricted</option>
-						<option value="commercial">Commercia/Industrial Only</option>
-					</select>
-					<h3></h3>
-					<label>Ground Water Utility: </label>
-					<select id="GroundWaterUtility" name="GroundWaterUtility">
-						<option selected value="base">Please Select</option>
-						<option value="drinking">Dringin Water Resource</option>
-						<option value="nondrinking">Nondrinking Water Resource</option>
-					</select>
-					<h3></h3>
-					<label>Distance To Nearest Surface Water Body: </label>
-					<select id="DistanceToNearest" name="DistanceToNearest">
-						<option selected value="base">Please Select</option>
-						<option value="lessthan"> < 150m</option>
-						<option value="greaterthan"> > 150m</option>
-					</select>
-					<h3></h3>
-					<label>Select Contaminant</label>
-					<select id="ContaminantType" name="ContaminantType">
-						<option selected value="base">Please Select</option>
-						<option value="Chemical">Chemical</option>
-						<option value="CAS">CAS</option>
-					</select>
-					<select id="ContaminantName" name="ContaminantName">
-						<option>Please choose from above</option>
-					</select>
-					<h3></h3>
+    <div id="country-select">
 
-					<input type="submit" value="Submit" onclick="saveInput()"/>
-					<h3></h3>
-				</form>
+        <div id="vertical">
+			<table>
+			  <tr>
+				<td>
+					<form id="myform" action="" method="get">
+						Site name:<br>
+						<input id="site_name" type="text" name="site_name"><br>
+  						Site Address:<br>
+  						<input id="site_address1" type="text" name="site_address1"><br>
+  						<input id="site_address2" type="text" name="site_address2"><br>
+  						<input id="site_address3" type="text" name="site_address3"><br>
+						Site ID:<br>
+						<input id="site_id" type="text" name="site_id"><br>
+						Date of EAL Search:<br>
+						<input id="date_of_search" type="date" name="date_of_search"><br>
+						<h3></h3>
+						<label>Land Use: </label><br>
+						<select id="LandUse" name="LandUse">
+							<option selected value="base">Please Select</option>
+							<option value="unrestricted">Unrestricted</option>
+							<option value="commercial">Commercia/Industrial Only</option>
+						</select>
+						<h3></h3>
+						<label>Ground Water Utility: </label><br>
+						<select id="GroundWaterUtility" name="GroundWaterUtility">
+							<option selected value="base">Please Select</option>
+							<option value="drinking">Drinking Water Resource</option>
+							<option value="nondrinking">Nondrinking Water Resource</option>
+						</select>
+						<h3></h3>
+						<label>Distance To Nearest Surface Water Body: </label><br>
+						<select id="DistanceToNearest" name="DistanceToNearest">
+							<option selected value="base">Please Select</option>
+							<option value="lessthan"> < 150m</option>
+							<option value="greaterthan"> > 150m</option>
+						</select>
+						<h3></h3>
+						<label>Select Contaminant Type</label><br>
+						<select id="ContaminantType" name="ContaminantType">
+							<option selected value="base">Please Select</option>
+							<option value="Chemical">Chemical</option>
+							<option value="CAS">CAS</option>
+						</select>
+						<p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p>
+						<select id="ContaminantName" name="ContaminantName" multiple="multiple">
+							<option>Please choose a contaminant type from above</option>
+						</select>
+						<h3></h3>
+					
+						<input type="submit" value="Submit" onclick="saveInput()"/>
+						<h3></h3>
+					</form>
+					{% if pdfFile %}
+						<form action="{{ STATIC_URL }} /static/{{ pdfFile }}">
+							<input type="submit" value="Download PDF" />
+						</form>
+					{% endif %}
+				</td>
+				<td>
+				</td>
+				<td>
+					<div class="tab">
+						{% for contaminant in contaminantNameList %}
+						<button class="tablinks" onclick="openCity(event, '{{ contaminant }}')" id="defaultOpen">{{ contaminant }}</button><br>
+						{% endfor %}
+					</div>
+				</td>
+				<td>
+					{% for contaminant, soil, groundWater, soilVapor in contaminantResults %}
+					<div id="{{ contaminant }}" class="tabcontent">
+						<fieldset>
+							<label>Final EALs: </label>
+							<h3></h3>
+							Soil (mg/kg): <input type="text" name="{{ contaminant }}SoilResult" id="{{ contaminant }}TxtSoil" value="{{ soil }}"/>1
+							Groundwater (ug/L): <input type="text" name="{{ contaminant }}GroundWaterResult" id="{{ contaminant }}TxtGroundwater" value="{{ groundWater }}"/>
+							Soil Vapor (ug/m^3): <input type="text" name="{{ contaminant }}SoilVaporResult" id="{{ contaminant }}TxtVapor" value="{{ soilVapor }}"/>
+						</fieldset>
+					</div>
+					{% endfor %}
+				</td>
+			  </tr>	
+			</table>
+        </div>
+    </div>
+</div>
 
-
-				<fieldset>
-					<label>Final EALs: </label>
-					<h3></h3>
-					Soil (mg/kg): <input type="text" name="soilResult" id="txtSoil" value="{{ soil }}"/>
-					Groundwater (ug/L): <input type="text" name="groundWaterResult" id="txtGroundwater" value="{{ groundWater }}"/>
-					Soil Vapor (ug/m^3): <input type="text" name="soilVaporResult" id="txtVapor" value="{{ soilVapor }}"/>
-				</fieldset>
-			</div>
-		</div>
-	</div>
-
-	</body>
-</html>
+</body>
+</html>            			

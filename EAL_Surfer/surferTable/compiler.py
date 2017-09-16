@@ -2,53 +2,80 @@
 Translation of compiler logic from Surfer Table Compiler Excel sheet 
 Quick implementation to get project going
 See file 'surfer_table_compiler_logic_breakdown.docx' in the resource directory (top level) for more info
+
+return a dictionary back in the form of:
+
+{'soil': string, 
+ 'groundWater' : string, 
+ 'soilVapor' : string,
+ 'surfReportResultList': list of strings, 
+ 'chemicalSummaryResultList': list of strings }  
+                  
 TODO rework code to make it cleaner and model driven
 """
 
 from utility import *
+from summaryLogic import *
 
 _landUse = ''
 _groundWaterUtility = ''
 _chemicalSelected = ''
 _distanceToNearestSurfaceWaterBody = ''
-_inputSoilConcentration = ''
-_inputGroundWaterConcentration = ''
-_inputSoilGasConcentration = ''
+_inputSoilConcentration = '-'
+_inputGroundWaterConcentration = '-'
+_inputSoilGasConcentration = '-'
+_site_name = '' 
+_site_address1 = ''
+_site_address2 = ''
+_site_address3 = ''
+_site_id = ''
+_date_of_search = ''
 
 def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName,
-                     optional_inputSoilConcentration=0, optional_inputGroundWaterConcentration=0, optional_inputSoilGasConcentration=0):
+                     optional_inputSoilConcentration='', optional_inputGroundWaterConcentration='', optional_inputSoilGasConcentration='',
+                     optional_site_name='', optional_site_address1='', optional_site_address2='',
+                     optional_site_address3='', optional_site_id='', optional_date_of_search=''):
     _landUse = landUse
     _groundWaterUtility = groundWaterUtility
     _chemicalSelected = contaminantName
     _distanceToNearestSurfaceWaterBody = distanceToNearest
-    _inputSoilConcentration = optional_inputSoilConcentration
-    _inputGroundWaterConcentration = optional_inputGroundWaterConcentration
-    _inputSoilGasConcentration = optional_inputSoilGasConcentration
-
-    #TODO this decoder ring is not maintainable in the long run, create dictionary instead
-    # Needed values
-    # 46, 50, 56, 60, 68, 70, 71, 72
-    # 3, 6, 11, 14, 21, 23, 24, 25
+    #_inputSoilConcentration = optional_inputSoilConcentration
+    #_inputGroundWaterConcentration = optional_inputGroundWaterConcentration
+    #_inputSoilGasConcentration = optional_inputSoilGasConcentration
+    _site_name = optional_site_name
+    _site_address1 = optional_site_address1
+    _site_address2 = optional_site_address2
+    _site_address3 = optional_site_address3
+    _site_id = optional_site_id
+    _date_of_search = optional_date_of_search
+    
+    # compute the needed values
     soilActionLevelsList = soilActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
-    # 75, 79, 83, 87, 88, 89
-    # 0, 3, 6, 9, 10, 11
     groundWaterActionLevelsList = groundWaterActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
-    # 99
-    # 5
     indoorAirAndSoilGasActionLevelsList = indoorAirAndSoilGasActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
+    
+    # clean up the for string sub in the templates
+    [contaminantNameConvert, landUseConvert, groundWaterUtilityConvert, distanceToNearestConvert] = selectedSiteScenarioConvert(contaminantName, landUse, groundWaterUtility, distanceToNearest)
+    
+    # retrieve surfer report data and put it into a list
+    surfReportTemplateList = findSurfReportTemplateReplaceList(_site_name, _site_address1, _site_address2, _site_address3, _site_id, _date_of_search,
+                                                               contaminantNameConvert, landUseConvert, groundWaterUtilityConvert, distanceToNearestConvert,
+                                                               _inputSoilConcentration, _inputGroundWaterConcentration, _inputSoilGasConcentration,
+                                                               soilActionLevelsList, groundWaterActionLevelsList, indoorAirAndSoilGasActionLevelsList)
+    # retrieve chemical summary data and put it into a list
+    chemicalSummaryTemplateList = findChemicalSummaryTemplateReplaceList(contaminantNameConvert, landUseConvert,
+                                                                soilActionLevelsList, groundWaterActionLevelsList, indoorAirAndSoilGasActionLevelsList)
+                                   
+    # column 71, 88, 99 for soil, groundWater, and soilVapor
+    # map to index -- ActionLevelsList[24], groundWaterActionLevelsList[10], indoorAirAndSoilGasActionLevelsList[5] 
+    resultDict = {'soil': soilActionLevelsList[24], 
+                  'groundWater': groundWaterActionLevelsList[10], 
+                  'soilVapor': indoorAirAndSoilGasActionLevelsList[5],
+                  'surfReportResultList': surfReportTemplateList, 
+                  'chemicalSummaryResultList': chemicalSummaryTemplateList }  
 
-    # debug statements
-    #result1 = [soilActionLevelsList[3], soilActionLevelsList[6], soilActionLevelsList[11], soilActionLevelsList[14],
-    # soilActionLevelsList[21], soilActionLevelsList[23], soilActionLevelsList[24], soilActionLevelsList[25]]
-    # debug statements
-    #result2 = [groundWaterActionLevelsList[0], groundWaterActionLevelsList[3], groundWaterActionLevelsList[6],
-    # groundWaterActionLevelsList[9], groundWaterActionLevelsList[10], groundWaterActionLevelsList[11]]
-    # result3 = indoorAirAndSoilGasActionLevelsList[5]
-
-    # return 71, 88, 99
-    [soil, groundWater, soilVapor] = [soilActionLevelsList[24], groundWaterActionLevelsList[10], indoorAirAndSoilGasActionLevelsList[5]]
-    return [soil, groundWater, soilVapor]
-
+    return resultDict
+                
 # Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
 def soilTier1EALTablesLookUp(groundWaterUtilityInput, distanceToNearestInput):
     tempString = ''
@@ -75,7 +102,7 @@ def finalGroundWaterActionLevelsLookUp(groundWaterUtilityInput, distanceToNeares
         tempString = 'TableD1d'
     return tempString
 
-# soil action levels logic
+# Soil action levels logic
 def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, distanceToNearestInput):
     result = []
 
@@ -209,7 +236,7 @@ def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, dis
     tableColumnNestedBackground = 'c5'
     chemicalCode = dbLookUpWithChemicalColumnSpecified(tableColumnBackground, tableNameBackGround, chemicalColumnInBackGroundTable, contaminantNameInput)
     background = ''
-    if chemicalCode == '2':
+    if chemicalCode == '2.0':
         backgroundValue = dbLookUp(tableColumnNestedBackground, tableNameNestedBackGround, contaminantNameInput)
         if backgroundValue == '':
             background = '?'
@@ -248,7 +275,7 @@ def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, dis
 
     return result
 
-# ground waster action levels logic
+# Ground waster action levels logic
 def groundWaterActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, distanceToNearestInput):
     result = []
 
@@ -334,7 +361,7 @@ def groundWaterActionLevels(contaminantNameInput, landUse, groundWaterUtilityInp
 
     return result
 
-# indoor air and soil gas action levels logic
+# Indoor air and soil gas action levels logic
 def indoorAirAndSoilGasActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, distanceToNearestInput):
     result = []
 

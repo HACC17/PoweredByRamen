@@ -1,0 +1,5 @@
+
+*.iml
+EAL_Surfer/surferTable/templates/chem1.html
+EAL_Surfer/surferTable/static/chem.pdf
+*.pdf
