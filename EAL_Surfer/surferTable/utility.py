@@ -12,6 +12,9 @@ configTableName = 'allchemicals'
 # use in view file
 contaminantTypeCas = 'CAS'
 contaminantTypeChemical = 'Chemical'
+# template file names
+chemicalSummaryTemplate = 'chemical_summary_template.html'
+surferReportTemplate = 'surfer_report_template.html'
 # list of strings to replace in template
 chemicalSummaryTemplateList = ['chemical_input', 
             'cancer_slope', 'cancer_inha', 'refer_dose_oral', 'refer_dose_inha', 'gastr_intest', 'skin_absorb', 'target_excess', 'target_hazard',
@@ -23,10 +26,10 @@ surferReoportrtTemplateList = ['site_name',
             'site-address1', 'site_address2', 'site_address3', 'site_id', 'date_of_search', 'land_use', 'ground_water_utility', 'distance_to_nearest', 'chemical_input', 'soil_site',
             'gw_site', 'sv_site', 'direct_exposure', 'dehazard', 'detable', 'vapor_emission', 'vehazard', 'vetable', 'terrestrial_ecotoxicity', 'tehazard', 'tetable',
             'gros_contamination', 'gchazard', 'gctable', 'leach_threat', 'lthazard', 'lttable', 'background_tier1', 'bthazard', 'final_soil_tier1', 
-			'final_soil_basis', 'drink_water', 'dwhazard', 'dwtable', 'v_emission_two', 've2hazard', 've2table', 'aquatic_ecotoxicity', 'aehazard', 'aetable', 
+            'final_soil_basis', 'drink_water', 'dwhazard', 'dwtable', 'v_emission_two', 've2hazard', 've2table', 'aquatic_ecotoxicity', 'aehazard', 'aetable', 
             'gross_contamination', 'gc2hazard', 'gc2table', 'final_ground_tier1', 'final_ground_basis',
             'shallow_soil', 'shhazard', 'shtable', 'indoor-air', 'iahazard', 'iatable']
-
+# wkhtmltopdf parameters to format PDF's on Windows machines
 windowsPDFKitOptions = {
     'quiet': '',
     'page-size': 'B7',
@@ -34,8 +37,8 @@ windowsPDFKitOptions = {
     'margin-right': '0.25in',
     'margin-bottom': '0.25in',
     'margin-left': '0.30in',
-    'disable-smart-shrinking': '' }
-
+    'disable-smart-shrinking': ''}
+# wkhtmltopdf parameters to format PDF's on *NIX machines
 nixPDFKitOptions = {
     'quiet': '',
     'page-size': 'B4',
@@ -44,9 +47,35 @@ nixPDFKitOptions = {
     'margin-bottom': '0.75in',
     'margin-left': '1.00in',
     'disable-smart-shrinking': ''}
-
+    
+# Scrub and convert user input for selected site values
+def selectedSiteScenarioConvert(contaminantName, landUse, groundWaterUtility, distanceToNearest):
+    contaminantNameConvert = contaminantName.encode('utf-8')
+    landUseConvert = 'Commercial/Industrial Only'
+    groundWaterUtilityConvert = 'Nondrinking Water Resource'
+    distanceToNearestConvert = '> 150m'
+    if landUse == 'unrestricted':
+        landUseConvert = 'Unrestricted'
+    if groundWaterUtility == 'drinking':
+        groundWaterUtilityConvert = 'Drinking Water Resource'
+    if distanceToNearest == 'lessthan':
+        distanceToNearestConvert = '< 150m'
+        
+    return [contaminantNameConvert, landUseConvert, groundWaterUtilityConvert, distanceToNearestConvert]
+    
+# Helper function convert each element in a list into UTF-8 format                                                          
+def convertDataToUTF8Format(inputList):
+    return [element.encode('utf-8') for element in inputList]   
+    
+    
+# Helper function replace '' with '-' to format better
+def replaceSpaceWithDash(inputList):
+    return [element or '-' for element in inputList]    
+    
+    
 # fileName = 'surfertable/templates/tempfile1.html'
-# outputFile = 'surfertable/static/test.pdf'            
+# outputFile = 'surfertable/static/test.pdf' 
+# Helper function convert html format to PDF format           
 def convertHtmlToPDF(fileName, outputFile):
     iFile = 'surfertable/templates/'+fileName
     oFile = 'surfertable/static/'+outputFile
@@ -57,7 +86,10 @@ def convertHtmlToPDF(fileName, outputFile):
         pdfkit.from_file(iFile, oFile, configuration = config, options = windowsPDFKitOptions)
     else:
         pdfkit.from_file(iFile, oFile, options = nixPDFKitOptions)
-            
+
+        
+# Helper function replace a list of string variables with a string of values 
+# from template file and write it to a new file     
 def replace_template(newFileName, templateFile, iteration, findList, replaceList):
     newfile = 'surfertable/templates/' + newFileName + str(iteration) +'.html'
     ifile = open('surfertable/templates/'+templateFile, 'rb')
@@ -71,6 +103,7 @@ def replace_template(newFileName, templateFile, iteration, findList, replaceList
     ifile.close()
     ofile.close()
 
+    
 # Helper function to look up mapping of CAS to chemical name
 def convertCASNameToChemicalName(contaminantName):
 
@@ -78,6 +111,7 @@ def convertCASNameToChemicalName(contaminantName):
     chemicalName = model.objects.values_list('c3', flat=True).filter(c2__exact=contaminantName)
     return chemicalName[0]
 
+    
 # Helper function to look up db (translate of vlookup functionality)
 def configLookUp(column, contaminantName):
     model = apps.get_model(appName, configTableName)
@@ -86,8 +120,8 @@ def configLookUp(column, contaminantName):
     result = result[0]
     if RepresentsFloat(result):
         return to_precision(float(result), 2)
-    return result	
-	
+    return result   
+    
     
 # Helper function to look up db (translate of vlookup functionality)
 def dbLookUp(column, table_name, contaminantName):

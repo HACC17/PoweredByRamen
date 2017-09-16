@@ -29,7 +29,8 @@ def index(request):
         if contaminantName:
             contaminantName = contaminantName[0]
         ##############################################################
-        print contaminantName
+
+        # build response dictionary and return it back to page
         response = {'listOfChemicalNames': listOfChemicalNames,
                     'listOfCASNames': listOfCASNames,
                     'landUse': landUse,
@@ -46,19 +47,18 @@ def index(request):
                 if contaminantType == contaminantTypeCas:
                     contaminantName = convertCASNameToChemicalName(contaminantName)
         
-            # pass user inputs to compiler logic
-            #[soil, groundWater, soilVapor] = surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName)
-            #response['soil'] = soil
-            #response['groundWater'] = groundWater
-            #response['soilVapor'] = soilVapor
-            surfReportTemplateList = surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName)
-            response['soil'] = 1
-            response['groundWater'] = 2
-            response['soilVapor'] = 3
-			# template list from utility file
-            print surfReportTemplateList
-            replace_template('tempfile', 'chemical_summary_template.html', 1, chemicalSummaryTemplateList, surfReportTemplateList)
-            convertHtmlToPDF('tempfile1.html', 'test.pdf') 
+            # pass user inputs to compiler logic and get a dictionary of results back
+            resultDict = surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName)
+            response['soil'] = resultDict.get('soil')
+            response['groundWater'] = resultDict.get('groundWater')
+            response['soilVapor'] = resultDict.get('soilVapor')
+            iteration = 1
+            # get template list from utility file
+            replace_template('chem', chemicalSummaryTemplate, iteration, chemicalSummaryTemplateList, resultDict.get('chemicalSummaryResultList'))
+            replace_template('surf', surferReportTemplate, iteration, surferReoportrtTemplateList, resultDict.get('surfReportResultList'))
+            convertHtmlToPDF('chem1.html', 'chem.pdf') 
+            convertHtmlToPDF('surf1.html', 'surf.pdf') 
+
             response['pdfFile'] = 'test.pdf'
                         
     return render(request, 'index.html', response)
