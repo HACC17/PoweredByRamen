@@ -70,6 +70,7 @@ def index(request):
             pdfFiles = []
             tempChemName = 'chem'
             tempSurfName = 'surf'
+            resultPDFFileName = ''
 
             # process each contaminant individually and store result in list
             for contaminantName in contaminantNameList:
@@ -96,7 +97,7 @@ def index(request):
                 pdfFiles.append(chemPDFFileName)
                 iteration += 1
 
-            fileName = mergePDFFiles(pdfFiles)
+            resultPDFFileName = mergePDFFiles(pdfFiles)
 
             # store all data back into list and pass it back to template side (view side)
             response['soilList'] = soil
@@ -104,6 +105,6 @@ def index(request):
             response['soilVaporList'] = soilVapor
             # zip everything up for easy access/process in the template side (view side)
             response['contaminantResults'] = zip(contaminantNameList, soil, groundWater, soilVapor)
-            response['pdfFile'] = fileName
+            response['pdfFile'] = resultPDFFileName
 
     return render(request, 'index.html', response)

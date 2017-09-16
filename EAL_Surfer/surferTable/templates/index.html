@@ -204,9 +204,11 @@
 						<input type="submit" value="Submit" onclick="saveInput()"/>
 						<h3></h3>
 					</form>
-					<form action="{{ STATIC_URL }} /static/{{ pdfFile }}">
-						<input type="submit" value="Download PDF" />
-					</form>
+					{% if pdfFile %}
+						<form action="{{ STATIC_URL }} /static/{{ pdfFile }}">
+							<input type="submit" value="Download PDF" />
+						</form>
+					{% endif %}
 				</td>
 				<td>
 				</td>
