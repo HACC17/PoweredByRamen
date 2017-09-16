@@ -59,29 +59,39 @@ def index(request):
                         temp.append(convertCASNameToChemicalName(contaminantName))
                     contaminantNameList = temp
 
+            # return contaminant list for template (view side) processing
             response['contaminantNameList'] = contaminantNameList
-            iteration = 1
+            # three separate lists to store final EALs per each contaminant selected
             soil = []
             groundWater = []
             soilVapor = []
+            iteration = 1
+
+            # process each contaminant individually and store result in list
             for contaminantName in contaminantNameList:
                 # pass user inputs to compiler logic and get a dictionary of results back
                 resultDict = surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName)
                 soil.append(resultDict.get('soil'))
                 groundWater.append(resultDict.get('groundWater'))
                 soilVapor.append(resultDict.get('soilVapor'))
-                # get template list from utility file
+
+                # get chemicalSummaryTemplateList and surferReportTemplateList from utility file
+                # each contaminant needs two template files (PDFs) to be outputed
+                # continuous generate all the PDFs and combine them into one at the end
+                # called 'result.pdf' so user could download it
                 replace_template('chem', chemicalSummaryTemplate, iteration, chemicalSummaryTemplateList, resultDict.get('chemicalSummaryResultList'))
                 replace_template('surf', surferReportTemplate, iteration, surferReportTemplateList, resultDict.get('surfReportResultList'))
                 numFile = str(iteration)
+                # convert HTMLs into PDFs
                 convertHtmlToPDF('chem' + numFile + '.html', 'chem' + numFile + '.pdf')
                 convertHtmlToPDF('surf' + numFile + '.html', 'surf' + numFile + '.pdf')
                 iteration += 1
 
+            # store all data back into list and pass it back to template side (view side)
             response['soilList'] = soil
             response['groundWaterList'] = groundWater
             response['soilVaporList'] = soilVapor
-            # zip everything up for easy access in the template side (view side)
+            # zip everything up for easy access/process in the template side (view side)
             response['contaminantResults'] = zip(contaminantNameList, soil, groundWater, soilVapor)
             response['pdfFile'] = 'result.pdf'
 
