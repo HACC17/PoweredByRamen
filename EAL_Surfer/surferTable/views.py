@@ -17,7 +17,14 @@ def index(request):
     listOfCASNames.pop(0) # pop off the column header
 
     if request.method == 'GET':
-    
+
+        siteName = request.GET.get('site_name', '')
+        siteId = request.GET.get('site_id', '')
+        siteaddress1 = request.GET.get('site_address1', '')
+        siteaddress2 = request.GET.get('site_address2', '')
+        siteaddress3 = request.GET.get('site_address3', '')
+        dateofsearch = request.GET.get('date_of_search', '')
+
         landUse = request.GET.get('LandUse', '')
         groundWaterUtility = request.GET.get('GroundWaterUtility', '')
         distanceToNearest = request.GET.get('DistanceToNearest', '')
@@ -28,7 +35,13 @@ def index(request):
         contaminantNameList = convertDataToUTF8Format(contaminantNameList)
 
         # build response dictionary and return it back to page
-        response = {'listOfChemicalNames': listOfChemicalNames,
+        response = {'siteName': siteName,
+                    'siteId': siteId,
+                    'siteaddress1': siteaddress1,
+                    'siteaddress2': siteaddress2,
+                    'siteaddress3': siteaddress3,
+                    'dateofsearch': dateofsearch,
+                    'listOfChemicalNames': listOfChemicalNames,
                     'listOfCASNames': listOfCASNames,
                     'landUse': landUse,
                     'groundWaterUtility': groundWaterUtility,
@@ -47,6 +60,7 @@ def index(request):
                         temp.append(convertCASNameToChemicalName(contaminantName))
                     contaminantNameList = temp
                     response['contaminantName'] = contaminantNameList
+
             iteration = 1
             soil = []
             groundWater = []

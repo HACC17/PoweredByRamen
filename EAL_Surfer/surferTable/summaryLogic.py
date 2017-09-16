@@ -235,6 +235,7 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
     iatable = 'Table C-3'
     
     list1 = [site_name, site_address1, site_address2, site_address3, site_id, date_of_search]
+
     list2 = [landUse, groundWaterUtility, distanceToNearest, contaminantName,
              inputSoilConcentration, inputGroundWaterConcentration, inputSoilGasConcentration, direct_exposure, dehazard, detable, vapor_emission, vehazard, vetable, 
              terrestrial_ecotoxicity, tehazard, tetable, gros_contamination, gchazard, gctable, leach_threat, lthazard, lttable, background_tier1, bthazard, final_soil_tier1, 
@@ -243,4 +244,6 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
              
     # seperating into two list because we don't want to replace blank addresses with '-'
     result = list1 + replaceSpaceWithDash(list2)
+    result = convertDataToUTF8Format(result)
+
     return result

@@ -22,13 +22,11 @@ chemicalSummaryTemplateList = ['chemical_input',
             'molecular_weight', 'ps_v', 'ps_s', 'organic_carbon', 'diff_in_air', 'diff_in_water', 'solu_water', 'hlc_atm', 'hlc_unit',
             'health_carc', 'health_muta', 'health_alim', 'health_card', 'health_deve', 'health_endo', 'health_eye', 'health_hema', 
             'health_immu', 'health_kidn', 'health_nerv', 'health_repr', 'health_resp', 'health_skin', 'health_other']
-surferReportTemplateList = ['site_name',
-            'site-address1', 'site_address2', 'site_address3', 'site_id', 'date_of_search', 'land_use', 'ground_water_utility', 'distance_to_nearest', 'chemical_input', 'soil_site',
-            'gw_site', 'sv_site', 'direct_exposure', 'dehazard', 'detable', 'vapor_emission', 'vehazard', 'vetable', 'terrestrial_ecotoxicity', 'tehazard', 'tetable',
-            'gros_contamination', 'gchazard', 'gctable', 'leach_threat', 'lthazard', 'lttable', 'background_tier1', 'bthazard', 'final_soil_tier1', 
-            'final_soil_basis', 'drink_water', 'dwhazard', 'dwtable', 'v_emission_two', 've2hazard', 've2table', 'aquatic_ecotoxicity', 'aehazard', 'aetable', 
-            'gross_contamination', 'gc2hazard', 'gc2table', 'final_ground_tier1', 'final_ground_basis',
-            'shallow_soil', 'shhazard', 'shtable', 'indoor-air', 'iahazard', 'iatable']
+surferReportTemplateList = ['site_name', 'site_address1', 'site_address2', 'site_address3', 'site_id', 'date_of_search', 'land_use', 'ground_water_utility', 'distance_to_nearest', 'chemical_input', 'soil_site',
+                            'gw_site', 'sv_site', 'direct_exposure', 'dehazard', 'detable', 'vapor_emission', 'vehazard', 'vetable', 'terrestrial_ecotoxicity', 'tehazard', 'tetable',
+                            'gros_contamination', 'gchazard', 'gctable', 'leach_threat', 'lthazard', 'lttable', 'background_tier1', 'bthazard', 'final_soil_tier1',
+                            'final_soil_basis', 'drink_water', 'dwhazard', 'dwtable', 'v_emission_two', 've2hazard', 've2table', 'aquatic_ecotoxicity', 'aehazard', 'aetable',
+                            'gross_contamination', 'gc2hazard', 'gc2table', 'final_ground_tier1', 'final_ground_basis', 'shallow_soil', 'shhazard', 'shtable', 'indoor-air', 'iahazard', 'iatable']
 # wkhtmltopdf parameters to format PDF's on Windows machines
 windowsPDFKitOptions = {
     'quiet': '',
