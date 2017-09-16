@@ -55,6 +55,7 @@ def index(request):
                 # convert CAS to chemical name
                 if contaminantType == contaminantTypeCas:
                     temp = []
+                    # convert each CAS value into their mapped contaminant name
                     for contaminantName in contaminantNameList:
                         temp.append(convertCASNameToChemicalName(contaminantName))
                     contaminantNameList = temp
