@@ -16,6 +16,7 @@ Resource materials provided by DoH: https://github.com/HACC17/challenges/tree/ma
 * Pip (v 9.0.1) or easy_install (v 36.4.0)
 * Sqlite3 (v 3.16.0 or equivalent)
 * Pdfkit (v 0.6.1)
+* PyPDF2 (v 1.26.0)
 * Wkhtmltopdf (v 0.12.4)
 * Django (v 1.11.5)
 * (Optional) virtualenv (v 15.1.0)
