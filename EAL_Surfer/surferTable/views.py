@@ -47,7 +47,7 @@ def index(request):
                     'groundWaterUtility': groundWaterUtility,
                     'distanceToNearest': distanceToNearest,
                     'contaminantType': contaminantType,
-                    'contaminantName': contaminantNameList }
+                    'contaminantNameList': contaminantNameList }
 
         # make sure all values are filled out before computation
         if landUse and groundWaterUtility and distanceToNearest and contaminantNameList:
@@ -59,7 +59,7 @@ def index(request):
                     for contaminantName in contaminantNameList:
                         temp.append(convertCASNameToChemicalName(contaminantName))
                     contaminantNameList = temp
-                    response['contaminantName'] = contaminantNameList
+                    response['contaminantNameList'] = contaminantNameList
 
             iteration = 1
             soil = []
@@ -79,9 +79,10 @@ def index(request):
                 convertHtmlToPDF('surf' + numFile + '.html', 'surf' + numFile + '.pdf')
                 iteration += 1
 
-            response['soil'] = soil
-            response['groundWater'] = groundWater
-            response['soilVapor'] = soilVapor
+            response['soilList'] = soil
+            response['groundWaterList'] = groundWater
+            response['soilVaporList'] = soilVapor
+            response['contaminantResults'] = zip(contaminantNameList, soil, groundWater, soilVapor)
             response['pdfFile'] = 'result.pdf'
 
     return render(request, 'index.html', response)

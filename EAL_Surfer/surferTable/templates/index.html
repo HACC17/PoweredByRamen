@@ -208,43 +208,23 @@
 				</td>
 				<td>
 					<div class="tab">
-						<button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">ACENAPHTHENE</button><br>
-						<button class="tablinks" onclick="openCity(event, 'Paris')">CYCLO-1,3,5-TRIMETHYLENE-2,4,6-TRINITRAMINE (RDX)</button><br>
-						<button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button><br>
-						<button class="tablinks" onclick="openCity(event, 'London')">ZINC</button><br>
-						<button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button><br>
-						<button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button><br>
+						{% for contaminant in contaminantNameList %}
+						<button class="tablinks" onclick="openCity(event, '{{ contaminant }}')" id="defaultOpen">{{ contaminant }}</button><br>
+						{% endfor %}
 					</div>
 				</td>
 				<td>
-					<div id="London" class="tabcontent">
+					{% for contaminant, soil, groundWater, soilVapor in contaminantResults %}
+					<div id="{{ contaminant }}" class="tabcontent">
 						<fieldset>
 							<label>Final EALs: </label>
 							<h3></h3>
-							Soil (mg/kg): <input type="text" name="soilResult" id="txtSoil" value="{{ soil }}"/>1
-							Groundwater (ug/L): <input type="text" name="groundWaterResult" id="txtGroundwater" value="{{ groundWater }}"/>
-							Soil Vapor (ug/m^3): <input type="text" name="soilVaporResult" id="txtVapor" value="{{ soilVapor }}"/>
+							Soil (mg/kg): <input type="text" name="{{ contaminant }}SoilResult" id="{{ contaminant }}TxtSoil" value="{{ soil }}"/>1
+							Groundwater (ug/L): <input type="text" name="{{ contaminant }}GroundWaterResult" id="{{ contaminant }}TxtGroundwater" value="{{ groundWater }}"/>
+							Soil Vapor (ug/m^3): <input type="text" name="{{ contaminant }}SoilVaporResult" id="{{ contaminant }}TxtVapor" value="{{ soilVapor }}"/>
 						</fieldset>
-						</div>
-						<div id="Paris" class="tabcontent">
-						<fieldset>
-							<label>Final EALs: </label>
-							<h3></h3>
-							Soil (mg/kg): <input type="text" name="soilResult" id="txtSoil" value="{{ soil }}"/>2
-							Groundwater (ug/L): <input type="text" name="groundWaterResult" id="txtGroundwater" value="{{ groundWater }}"/>
-							Soil Vapor (ug/m^3): <input type="text" name="soilVaporResult" id="txtVapor" value="{{ soilVapor }}"/>
-						</fieldset>
-						</div>
-
-						<div id="Tokyo" class="tabcontent">
-						<fieldset>
-							<label>Final EALs: </label>
-							<h3></h3>
-							Soil (mg/kg): <input type="text" name="soilResult" id="txtSoil" value="{{ soil }}"/>3
-							Groundwater (ug/L): <input type="text" name="groundWaterResult" id="txtGroundwater" value="{{ groundWater }}"/>
-							Soil Vapor (ug/m^3): <input type="text" name="soilVaporResult" id="txtVapor" value="{{ soilVapor }}"/>
-						</fieldset>
-						</div>	
+					</div>
+					{% endfor %}
 				</td>
 			  </tr>	
 			</table>
