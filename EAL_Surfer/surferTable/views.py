@@ -24,7 +24,6 @@ def index(request):
         siteaddress2 = request.GET.get('site_address2', '')
         siteaddress3 = request.GET.get('site_address3', '')
         dateofsearch = request.GET.get('date_of_search', '')
-
         landUse = request.GET.get('LandUse', '')
         groundWaterUtility = request.GET.get('GroundWaterUtility', '')
         distanceToNearest = request.GET.get('DistanceToNearest', '')
@@ -46,11 +45,11 @@ def index(request):
                     'landUse': landUse,
                     'groundWaterUtility': groundWaterUtility,
                     'distanceToNearest': distanceToNearest,
-                    'contaminantType': contaminantType,
-                    'contaminantNameList': contaminantNameList }
+                    'contaminantType': contaminantType }
 
         # make sure all values are filled out before computation
-        if landUse and groundWaterUtility and distanceToNearest and contaminantNameList:
+        if landUse != 'base' and groundWaterUtility != 'base' and distanceToNearest != 'base' and contaminantNameList:
+            print landUse
             #  only do lookup if values are from the available list
             if (contaminantType == contaminantTypeCas) or (contaminantType == contaminantTypeChemical):
                 # convert CAS to chemical name
@@ -59,8 +58,8 @@ def index(request):
                     for contaminantName in contaminantNameList:
                         temp.append(convertCASNameToChemicalName(contaminantName))
                     contaminantNameList = temp
-                    response['contaminantNameList'] = contaminantNameList
 
+            response['contaminantNameList'] = contaminantNameList
             iteration = 1
             soil = []
             groundWater = []
@@ -82,6 +81,7 @@ def index(request):
             response['soilList'] = soil
             response['groundWaterList'] = groundWater
             response['soilVaporList'] = soilVapor
+            # zip everything up for easy access in the template side (view side)
             response['contaminantResults'] = zip(contaminantNameList, soil, groundWater, soilVapor)
             response['pdfFile'] = 'result.pdf'
 
