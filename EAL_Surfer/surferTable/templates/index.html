@@ -34,6 +34,13 @@
 		});
 
 		$( document ).ready(function() {
+			$('#site_name').val('{{ siteName }}');
+			$('#site_address1').val('{{ siteaddress1 }}');
+			$('#site_address2').val('{{ siteaddress2 }}');
+			$('#site_address3').val('{{ siteaddress3 }}');
+			$('#site_id').val('{{ siteId }}');
+			$('#site_name').val('{{ siteName }}');
+			//$('#date_of_search').val('(( dateofsearch }}');
             $('#LandUse').val('{{ landUse }}');
             $('#GroundWaterUtility').val('{{ groundWaterUtility }}');
             $('#DistanceToNearest').val('{{ distanceToNearest }}');
@@ -151,15 +158,15 @@
 				<td>
 					<form id="myform" action="" method="get">
 						Site name:<br>
-						<input type="text" name="site_name"><br>
+						<input id="site_name" type="text" name="site_name"><br>
   						Site Address:<br>
-  						<input type="text" name="site_address1"><br>
-  						<input type="text" name="site_address2"><br>
-  						<input type="text" name="site_address3"><br>
+  						<input id="site_address1" type="text" name="site_address1"><br>
+  						<input id="site_address2" type="text" name="site_address2"><br>
+  						<input id="site_address3" type="text" name="site_address3"><br>
 						Site ID:<br>
-						<input type="text" name="site_id"><br>
+						<input id="site_id" type="text" name="site_id"><br>
 						Date of EAL Search:<br>
-						<input type="date" name="date_of_search"><br>
+						<input id="date_of_search" type="date" name="date_of_search"><br>
 						<h3></h3>
 						<label>Land Use: </label><br>
 						<select id="LandUse" name="LandUse">

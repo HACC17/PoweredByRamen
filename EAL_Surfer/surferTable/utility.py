@@ -23,7 +23,7 @@ chemicalSummaryTemplateList = ['chemical_input',
             'health_carc', 'health_muta', 'health_alim', 'health_card', 'health_deve', 'health_endo', 'health_eye', 'health_hema', 
             'health_immu', 'health_kidn', 'health_nerv', 'health_repr', 'health_resp', 'health_skin', 'health_other']
 surferReoportrtTemplateList = ['site_name', 
-            'site-address1', 'site_address2', 'site_address3', 'site_id', 'date_of_search', 'land_use', 'ground_water_utility', 'distance_to_nearest', 'chemical_input', 'soil_site',
+            'site_address1', 'site_address2', 'site_address3', 'site_id', 'date_of_search', 'land_use', 'ground_water_utility', 'distance_to_nearest', 'chemical_input', 'soil_site',
             'gw_site', 'sv_site', 'direct_exposure', 'dehazard', 'detable', 'vapor_emission', 'vehazard', 'vetable', 'terrestrial_ecotoxicity', 'tehazard', 'tetable',
             'gros_contamination', 'gchazard', 'gctable', 'leach_threat', 'lthazard', 'lttable', 'background_tier1', 'bthazard', 'final_soil_tier1', 
             'final_soil_basis', 'drink_water', 'dwhazard', 'dwtable', 'v_emission_two', 've2hazard', 've2table', 'aquatic_ecotoxicity', 'aehazard', 'aetable', 

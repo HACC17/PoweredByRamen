@@ -42,12 +42,12 @@ def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminant
     #_inputSoilConcentration = optional_inputSoilConcentration
     #_inputGroundWaterConcentration = optional_inputGroundWaterConcentration
     #_inputSoilGasConcentration = optional_inputSoilGasConcentration
-    #_site_name = optional_site_name
-    #_site_address1 = optional_site_address1
-    #_site_address2 = optional_site_address2
-    #_site_address3 = optional_site_address3
-    #_site_id = optional_site_id
-    #_date_of_search = optional_date_of_search
+    _site_name = optional_site_name
+    _site_address1 = optional_site_address1
+    _site_address2 = optional_site_address2
+    _site_address3 = optional_site_address3
+    _site_id = optional_site_id
+    _date_of_search = optional_date_of_search
     
     # compute the needed values
     soilActionLevelsList = soilActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
