@@ -22,7 +22,7 @@ chemicalSummaryTemplateList = ['chemical_input',
             'molecular_weight', 'ps_v', 'ps_s', 'organic_carbon', 'diff_in_air', 'diff_in_water', 'solu_water', 'hlc_atm', 'hlc_unit',
             'health_carc', 'health_muta', 'health_alim', 'health_card', 'health_deve', 'health_endo', 'health_eye', 'health_hema', 
             'health_immu', 'health_kidn', 'health_nerv', 'health_repr', 'health_resp', 'health_skin', 'health_other']
-surferReoportrtTemplateList = ['site_name', 
+surferReportTemplateList = ['site_name',
             'site-address1', 'site_address2', 'site_address3', 'site_id', 'date_of_search', 'land_use', 'ground_water_utility', 'distance_to_nearest', 'chemical_input', 'soil_site',
             'gw_site', 'sv_site', 'direct_exposure', 'dehazard', 'detable', 'vapor_emission', 'vehazard', 'vetable', 'terrestrial_ecotoxicity', 'tehazard', 'tetable',
             'gros_contamination', 'gchazard', 'gctable', 'leach_threat', 'lthazard', 'lttable', 'background_tier1', 'bthazard', 'final_soil_tier1', 

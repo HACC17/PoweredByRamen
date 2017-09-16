@@ -59,7 +59,7 @@ def index(request):
                 soilVapor.append(resultDict.get('soilVapor'))
                 # get template list from utility file
                 replace_template('chem', chemicalSummaryTemplate, iteration, chemicalSummaryTemplateList, resultDict.get('chemicalSummaryResultList'))
-                replace_template('surf', surferReportTemplate, iteration, surferReoportrtTemplateList, resultDict.get('surfReportResultList'))
+                replace_template('surf', surferReportTemplate, iteration, surferReportTemplateList, resultDict.get('surfReportResultList'))
                 numFile = str(iteration)
                 convertHtmlToPDF('chem' + numFile + '.html', 'chem' + numFile + '.pdf')
                 convertHtmlToPDF('surf' + numFile + '.html', 'surf' + numFile + '.pdf')
@@ -70,5 +70,4 @@ def index(request):
             response['soilVapor'] = soilVapor
             response['pdfFile'] = 'result.pdf'
 
-    print response
     return render(request, 'index.html', response)
