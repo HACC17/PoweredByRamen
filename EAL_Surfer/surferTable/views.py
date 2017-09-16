@@ -49,7 +49,6 @@ def index(request):
 
         # make sure all values are filled out before computation
         if landUse != 'base' and groundWaterUtility != 'base' and distanceToNearest != 'base' and contaminantNameList:
-            print landUse
             #  only do lookup if values are from the available list
             if (contaminantType == contaminantTypeCas) or (contaminantType == contaminantTypeChemical):
                 # convert CAS to chemical name
@@ -67,6 +66,10 @@ def index(request):
             groundWater = []
             soilVapor = []
             iteration = 1
+            # list of PDF files to combine into one
+            pdfFiles = []
+            tempChemName = 'chem'
+            tempSurfName = 'surf'
 
             # process each contaminant individually and store result in list
             for contaminantName in contaminantNameList:
@@ -80,13 +83,20 @@ def index(request):
                 # each contaminant needs two template files (PDFs) to be outputed
                 # continuous generate all the PDFs and combine them into one at the end
                 # called 'result.pdf' so user could download it
-                replace_template('chem', chemicalSummaryTemplate, iteration, chemicalSummaryTemplateList, resultDict.get('chemicalSummaryResultList'))
-                replace_template('surf', surferReportTemplate, iteration, surferReportTemplateList, resultDict.get('surfReportResultList'))
+                replace_template(tempChemName, chemicalSummaryTemplate, iteration, chemicalSummaryTemplateList, resultDict.get('chemicalSummaryResultList'))
+                replace_template(tempSurfName, surferReportTemplate, iteration, surferReportTemplateList, resultDict.get('surfReportResultList'))
                 numFile = str(iteration)
-                # convert HTMLs into PDFs
-                convertHtmlToPDF('chem' + numFile + '.html', 'chem' + numFile + '.pdf')
-                convertHtmlToPDF('surf' + numFile + '.html', 'surf' + numFile + '.pdf')
+                chemHTMLFileName = tempChemName + numFile
+                surfHTMLFileName = tempSurfName + numFile
+                # convert HTMLs into PDFs, this will remove the input HTMLs for house keeping purpose
+
+                chemPDFFileName = convertHtmlToPDF(chemHTMLFileName)
+                surfPDFFileName = convertHtmlToPDF(surfHTMLFileName)
+                pdfFiles.append(surfPDFFileName)
+                pdfFiles.append(chemPDFFileName)
                 iteration += 1
+
+            fileName = mergePDFFiles(pdfFiles)
 
             # store all data back into list and pass it back to template side (view side)
             response['soilList'] = soil
@@ -94,6 +104,6 @@ def index(request):
             response['soilVaporList'] = soilVapor
             # zip everything up for easy access/process in the template side (view side)
             response['contaminantResults'] = zip(contaminantNameList, soil, groundWater, soilVapor)
-            response['pdfFile'] = 'result.pdf'
+            response['pdfFile'] = fileName
 
     return render(request, 'index.html', response)

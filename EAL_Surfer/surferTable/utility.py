@@ -4,6 +4,7 @@ from django.apps import apps
 import tempfile
 import os
 import pdfkit
+from PyPDF2 import PdfFileMerger
 
 # utility vars
 dbName = 'EAL_SURFER_TABLES_DB.sqlite3'
@@ -45,7 +46,23 @@ nixPDFKitOptions = {
     'margin-bottom': '0.75in',
     'margin-left': '1.00in',
     'disable-smart-shrinking': ''}
-    
+
+
+# Helper function to merge a list of PDF files into one
+def mergePDFFiles(pdflist):
+    filename = 'result.pdf'
+    oFile = 'surfertable/static/'+filename
+    merger = PdfFileMerger()
+
+    for pdf in pdflist:
+        merger.append(open(pdf, 'rb'))
+        os.remove(pdf)
+
+    with open(oFile, 'wb') as fout:
+        merger.write(fout)
+
+    return filename
+
 # Scrub and convert user input for selected site values
 def selectedSiteScenarioConvert(contaminantName, landUse, groundWaterUtility, distanceToNearest):
     contaminantNameConvert = contaminantName.encode('utf-8')
@@ -74,9 +91,9 @@ def replaceSpaceWithDash(inputList):
 # fileName = 'surfertable/templates/tempfile1.html'
 # outputFile = 'surfertable/static/test.pdf' 
 # Helper function convert html format to PDF format           
-def convertHtmlToPDF(fileName, outputFile):
-    iFile = 'surfertable/templates/'+fileName
-    oFile = 'surfertable/static/'+outputFile
+def convertHtmlToPDF(fileName):
+    iFile = 'surfertable/templates/'+fileName+'.html'
+    oFile = 'surfertable/static/'+fileName+'.pdf'
     # Windows and *nix machines behave differently
     if os.name != 'nt':
         # package would not install correctly, installed manually and set explicit path
@@ -84,6 +101,10 @@ def convertHtmlToPDF(fileName, outputFile):
         pdfkit.from_file(iFile, oFile, configuration = config, options = windowsPDFKitOptions)
     else:
         pdfkit.from_file(iFile, oFile, options = nixPDFKitOptions)
+
+    # clean up input file
+    os.remove(iFile)
+    return oFile
 
         
 # Helper function replace a list of string variables with a string of values 

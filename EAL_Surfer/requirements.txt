@@ -1,3 +1,5 @@
 Django==1.11.5
 pdfkit==0.6.1
-wkhtmltopdf==0.2
+PyPDF2==1.26.0
+pytz==2017.2
+virtualenv==15.1.0
