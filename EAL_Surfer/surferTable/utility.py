@@ -29,14 +29,14 @@ surferReportTemplateList = ['site_name', 'site_address1', 'site_address2', 'site
                             'final_soil_basis', 'drink_water', 'dwhazard', 'dwtable', 'v_emission_two', 've2hazard', 've2table', 'aquatic_ecotoxicity', 'aehazard', 'aetable',
                             'gross_contamination', 'gc2hazard', 'gc2table', 'final_ground_tier1', 'final_ground_basis', 'shallow_soil', 'shhazard', 'shtable', 'indoor-air', 'iahazard', 'iatable']
 # wkhtmltopdf parameters to format PDF's on Windows machines
-windowsPDFKitOptions = {
-    'quiet': '',
-    'page-size': 'B7',
-    'margin-top': '0.35in',
-    'margin-right': '0.25in',
-    'margin-bottom': '0.25in',
-    'margin-left': '0.30in',
-    'disable-smart-shrinking': ''}
+windowsPDFKitOptions = {}
+    #'quiet': '',
+    #'page-size': 'A5',
+    #'margin-top': '0.35in',
+    #'margin-right': '0.25in',
+    #'margin-bottom': '0.25in',
+    #'margin-left': '0.30in',
+    #'disable-smart-shrinking': ''}
 # wkhtmltopdf parameters to format PDF's on *NIX machines
 nixPDFKitOptions = {
     'quiet': '',
@@ -51,7 +51,7 @@ nixPDFKitOptions = {
 # Helper function to merge a list of PDF files into one
 def mergePDFFiles(pdflist):
     filename = 'result.pdf'
-    oFile = 'surfertable/static/'+filename
+    oFile = 'static/'+filename
     merger = PdfFileMerger()
 
     for pdf in pdflist:
@@ -88,12 +88,10 @@ def replaceSpaceWithDash(inputList):
     return [element or '-' for element in inputList]    
     
     
-# fileName = 'surfertable/templates/tempfile1.html'
-# outputFile = 'surfertable/static/test.pdf' 
-# Helper function convert html format to PDF format           
+# Helper function convert html format to PDF format
 def convertHtmlToPDF(fileName):
-    iFile = 'surfertable/templates/'+fileName+'.html'
-    oFile = 'surfertable/static/'+fileName+'.pdf'
+    iFile = 'static/'+fileName+'.html'
+    oFile = 'static/'+fileName+'.pdf'
     # Windows and *nix machines behave differently
     if os.name != 'nt':
         # package would not install correctly, installed manually and set explicit path
@@ -110,8 +108,8 @@ def convertHtmlToPDF(fileName):
 # Helper function replace a list of string variables with a string of values 
 # from template file and write it to a new file     
 def replace_template(newFileName, templateFile, iteration, findList, replaceList):
-    newfile = 'surfertable/templates/' + newFileName + str(iteration) +'.html'
-    ifile = open('surfertable/templates/'+templateFile, 'rb')
+    newfile = 'static/' + newFileName + str(iteration) +'.html'
+    ifile = open('static/'+templateFile, 'rb')
     ofile = open(newfile, 'wb')
 
     s = ifile.read()
