@@ -13,6 +13,9 @@ def index(request):
     # get drop down list values from specific columns of config table
     listOfChemicalNames = [chemical.encode("utf8") for chemical in Allchemicals.objects.values_list('c3', flat=True)]
     listOfChemicalNames.pop(0) # pop off the column header
+    # sort list because if admin decided to insert new elements it needs to be listed alphabetically, ignore sorting CAS name
+    # since it's not in any particular order
+    listOfChemicalNames = sorted(listOfChemicalNames, key=lambda s: s.lower())
     listOfCASNames = [chemical.encode("utf8") for chemical in Allchemicals.objects.values_list('c2', flat=True)]
     listOfCASNames.pop(0) # pop off the column header
 
