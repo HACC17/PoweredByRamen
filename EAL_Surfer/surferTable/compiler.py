@@ -54,12 +54,6 @@ def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminant
     groundWaterActionLevelsList = groundWaterActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
     indoorAirAndSoilGasActionLevelsList = indoorAirAndSoilGasActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
 
-    #print soilActionLevelsList
-    #print '********'
-    #print groundWaterActionLevelsList
-    #print '********'
-    #print indoorAirAndSoilGasActionLevelsList
-
     # clean up the for string sub in the templates
     [contaminantNameConvert, landUseConvert, groundWaterUtilityConvert, distanceToNearestConvert] = selectedSiteScenarioConvert(contaminantName, landUse, groundWaterUtility, distanceToNearest)
     

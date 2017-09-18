@@ -14,11 +14,9 @@ def checkTargetOrgansAndHealthEffect(chemName, tableName, column):
     
 # Return table name based on land use input
 def humanToxicityTableLookUp(landUse):
-    print landUse
     tempString = 'Table I-2'
     if landUse == 'unrestricted':
         tempString = 'Table I-1'
-    print tempString
     return tempString
     
 # these variable names are map to the chemicalSummaryTemplateList found in utility file
