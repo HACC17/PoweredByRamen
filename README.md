@@ -16,20 +16,31 @@ Resource materials provided by DoH: https://github.com/HACC17/challenges/tree/ma
 * Pip (v 9.0.1) or easy_install (v 36.4.0)
 * Sqlite3 (v 3.16.0 or equivalent)
 * Pdfkit (v 0.6.1)
-* PyPDF2 (v 1.26.0)
 * Wkhtmltopdf (v 0.12.4)
 * Django (v 1.11.5)
 * (Optional) virtualenv (v 15.1.0)
 
 ## How to run:
+Optional -- create a virtualenv project (assuming you had installed it via pip) with command
+```bash
+virtualenv <projectName>
+cd <projectName>
+source  <projectName>/bin/activate
+```
 1. Clone/Download project to desired folder
-2. Navigate into "EAL_Surfer" directory via cmd prompt/*NIX shell
-3. Run command 
+2. Go into the cloned/downloaded project folder and Install required packages with command
+```bash
+pip -r requirements.txt
+```
+3. Navigate into "EAL_Surfer" directory via cmd prompt/*NIX shell
+4. Run command 
 ```bash
 python manage.py runserver
 ```
-4. Open web browser and enter url: "http://127.0.0.1:8000/" (left it as default)
-5. Enjoy
+Note: for some reason the "wkhtmltopdf" package doesn't install correctly, so you will
+need to install it from their official website, and add the executable to your ENV or copy the executable somehwere your system will find 
+5. Open web browser and enter url: "http://127.0.0.1:8000/" (left it as default)
+6. Enjoy
 
 ## Optional:
 1. There's an admin page for administrator to add/update/delete data from the back-end Sqlite DB
