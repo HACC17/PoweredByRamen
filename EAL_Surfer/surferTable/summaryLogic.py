@@ -198,9 +198,9 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
 
     # compiler logic
     detable = 'Table I-2'
-    if landUse == 'unrestricted':
-        detable = 'Table I-I'
-
+    if landUse == 'Unrestricted':
+        detable = 'Table I-1'
+        
     vapor_emission = soilActionLevelsList[6]
     vehazard = '-'
     vetable = 'Table C-1b'
@@ -235,7 +235,7 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
 
     # compiler logic
     gc2table = 'Table G-2'
-    if distanceToNearest == 'greaterthan':
+    if distanceToNearest == '< 150m':
         gc2table = 'Table G-1'
 
     final_ground_tier1 = findMinFromList([drink_water, v_emission_two, aquatic_ecotoxicity, gross_contamination])
