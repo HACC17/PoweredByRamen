@@ -15,7 +15,7 @@ def checkTargetOrgansAndHealthEffect(chemName, tableName, column):
 # Return table name based on land use input
 def humanToxicityTableLookUp(landUse):
     tempString = 'Table I-2'
-    if landUse == 'unrestricted':
+    if landUse == 'Unrestricted':
         tempString = 'Table I-1'
     return tempString
     
@@ -200,7 +200,7 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
     detable = 'Table I-2'
     if landUse == 'Unrestricted':
         detable = 'Table I-1'
-        
+
     vapor_emission = soilActionLevelsList[6]
     vehazard = '-'
     vetable = 'Table C-1b'
