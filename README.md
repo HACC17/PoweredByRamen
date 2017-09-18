@@ -20,6 +20,9 @@ Resource materials provided by DoH: https://github.com/HACC17/challenges/tree/ma
 * Django (v 1.11.5)
 * (Optional) virtualenv (v 15.1.0)
 
+Note: for some reason the "wkhtmltopdf" package doesn't install correctly, so you will
+need to install it from their official website, https://wkhtmltopdf.org/downloads.html, and add the executable to your environment path or copy the executable somewhere your system is able to find 
+
 ## How to run:
 Optional -- create a virtualenv project (assuming you had installed it via pip) with command
 ```bash
@@ -37,8 +40,6 @@ pip -r requirements.txt
 ```bash
 python manage.py runserver
 ```
-Note: for some reason the "wkhtmltopdf" package doesn't install correctly, so you will
-need to install it from their official website, and add the executable to your ENV or copy the executable somehwere your system will find 
 5. Open web browser and enter url: "http://127.0.0.1:8000/" (left it as default)
 6. Enjoy
 
