@@ -14,9 +14,9 @@ def checkTargetOrgansAndHealthEffect(chemName, tableName, column):
     
 # Return table name based on land use input
 def humanToxicityTableLookUp(landUse):
-    tempString = 'TableI2'
-    if landUse == 'unrestricted':
-        tempString = 'TableI1'
+    tempString = 'Table I-2'
+    if landUse == 'Unrestricted':
+        tempString = 'Table I-1'
     return tempString
     
 # these variable names are map to the chemicalSummaryTemplateList found in utility file
@@ -165,7 +165,8 @@ def findChemicalSummaryTemplateReplaceList(contaminantName, landUse,
     health_other = checkTargetOrgansAndHealthEffect(contaminantName, tableNamePotentialHealth, tableColumnOther)
 
     result = [contaminantName, cancer_slope, cancer_inha, refer_dose_oral, refer_dose_inha, gastr_intest, skin_absorb, 
-              target_excess, target_hazard, fresh_chronic, marine_chronic, estuary_chronic, fresh_acute, marine_acute, 
+              target_excess, tableNameHumanToxicityFactorsLookUp, target_hazard, tableNameHumanToxicityFactorsLookUp,
+              fresh_chronic, marine_chronic, estuary_chronic, fresh_acute, marine_acute,
               estruary_acute, bio_goal, molecular_weight, ps_v, ps_s, organic_carbon, diff_in_air, diff_in_water, 
               solu_water, hlc_atm, hlc_unit, health_carc, health_muta, health_alim, health_card, health_deve, health_endo, 
               health_eye, health_hema, health_immu, health_kidn, health_nerv, health_repr, health_resp, health_skin, health_other]
@@ -194,7 +195,12 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
     # Soil Environmental Hazards
     direct_exposure = soilActionLevelsList[3]
     dehazard = '-'
-    detable = 'Table I-1'
+
+    # compiler logic
+    detable = 'Table I-2'
+    if landUse == 'Unrestricted':
+        detable = 'Table I-1'
+
     vapor_emission = soilActionLevelsList[6]
     vehazard = '-'
     vetable = 'Table C-1b'
@@ -214,7 +220,10 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
     # Groundwater Environmental Hazards     
     drink_water = groundWaterActionLevelsList[0]
     dwhazard = '-'
-    dwtable = 'Table D-1a'
+
+    # compiler logic
+    dwtable = finalGroundWaterActionLevelsLookUp(groundWaterUtility, distanceToNearest)
+
     v_emission_two = groundWaterActionLevelsList[3]
     ve2hazard = '-'
     ve2table = 'Table C-1a'
@@ -223,7 +232,12 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
     aetable = 'Table D-4a'
     gross_contamination = groundWaterActionLevelsList[9]
     gc2hazard = '-'
-    gc2table = 'Table G-1'
+
+    # compiler logic
+    gc2table = 'Table G-2'
+    if distanceToNearest == '< 150m':
+        gc2table = 'Table G-1'
+
     final_ground_tier1 = findMinFromList([drink_water, v_emission_two, aquatic_ecotoxicity, gross_contamination])
     final_ground_basis = groundWaterActionLevelsList[11]
     # Other Tier 1 EALs     
@@ -233,7 +247,7 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
     indoor_air = indoorAirAndSoilGasActionLevelsList[2]
     iahazard = '-'
     iatable = 'Table C-3'
-    
+    print site_id
     list1 = [site_name, site_address1, site_address2, site_address3, site_id, date_of_search]
 
     list2 = [landUse, groundWaterUtility, distanceToNearest, contaminantName,

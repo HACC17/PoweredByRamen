@@ -48,12 +48,13 @@ def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminant
     _site_address3 = optional_site_address3
     _site_id = optional_site_id
     _date_of_search = optional_date_of_search
-    
+    print optional_site_id
+    print _site_id
     # compute the needed values
     soilActionLevelsList = soilActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
     groundWaterActionLevelsList = groundWaterActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
     indoorAirAndSoilGasActionLevelsList = indoorAirAndSoilGasActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
-    
+
     # clean up the for string sub in the templates
     [contaminantNameConvert, landUseConvert, groundWaterUtilityConvert, distanceToNearestConvert] = selectedSiteScenarioConvert(contaminantName, landUse, groundWaterUtility, distanceToNearest)
     
@@ -75,32 +76,6 @@ def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminant
                   'chemicalSummaryResultList': chemicalSummaryTemplateList }  
 
     return resultDict
-                
-# Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
-def soilTier1EALTablesLookUp(groundWaterUtilityInput, distanceToNearestInput):
-    tempString = ''
-    if groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'greaterthan':
-        tempString = 'TableA1'
-    elif groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'lessthan':
-        tempString = 'TableA2'
-    elif groundWaterUtilityInput == 'nondrinking' and distanceToNearestInput == 'greaterthan':
-        tempString = 'TableB1'
-    else:
-        tempString = 'TableB2'
-    return tempString
-
-# Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
-def finalGroundWaterActionLevelsLookUp(groundWaterUtilityInput, distanceToNearestInput):
-    tempString = ''
-    if groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'lessthan':
-        tempString = 'TableD1a'
-    elif groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'greaterthan':
-        tempString = 'TableD1b'
-    elif groundWaterUtilityInput == 'nondrinking' and distanceToNearestInput == 'lessthan':
-        tempString = 'TableD1c'
-    else:
-        tempString = 'TableD1d'
-    return tempString
 
 # Soil action levels logic
 def soilActionLevels(contaminantNameInput, landUse, groundWaterUtilityInput, distanceToNearestInput):
@@ -284,7 +259,9 @@ def groundWaterActionLevels(contaminantNameInput, landUse, groundWaterUtilityInp
     ###########################
     tableNameDrinkingWaterToxicity = 'TableD3a'
     tableColumnDrinkingWaterToxicity = 'c2'
-    drinkingWaterToxicity = dbLookUp(tableColumnDrinkingWaterToxicity, tableNameDrinkingWaterToxicity, contaminantNameInput)
+    drinkingWaterToxicity = '-'
+    if groundWaterUtilityInput != 'nondrinking':
+        drinkingWaterToxicity = dbLookUp(tableColumnDrinkingWaterToxicity, tableNameDrinkingWaterToxicity, contaminantNameInput)
     result.append(drinkingWaterToxicity)
 
     ###################

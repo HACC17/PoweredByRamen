@@ -18,7 +18,7 @@ chemicalSummaryTemplate = 'chemical_summary_template.html'
 surferReportTemplate = 'surfer_report_template.html'
 # list of strings to replace in template
 chemicalSummaryTemplateList = ['chemical_input', 
-            'cancer_slope', 'cancer_inha', 'refer_dose_oral', 'refer_dose_inha', 'gastr_intest', 'skin_absorb', 'target_excess', 'target_hazard',
+            'cancer_slope', 'cancer_inha', 'refer_dose_oral', 'refer_dose_inha', 'gastr_intest', 'skin_absorb', 'target_excess', 'tecru_table', 'target_hazard', 'thqu_table',
             'fresh_chronic', 'marine_chronic', 'estuary_chronic', 'fresh_acute', 'marine_acute', 'estruary_acute', 'bio_goal',
             'molecular_weight', 'ps_v', 'ps_s', 'organic_carbon', 'diff_in_air', 'diff_in_water', 'solu_water', 'hlc_atm', 'hlc_unit',
             'health_carc', 'health_muta', 'health_alim', 'health_card', 'health_deve', 'health_endo', 'health_eye', 'health_hema', 
@@ -30,13 +30,13 @@ surferReportTemplateList = ['site_name', 'site_address1', 'site_address2', 'site
                             'gross_contamination', 'gc2hazard', 'gc2table', 'final_ground_tier1', 'final_ground_basis', 'shallow_soil', 'shhazard', 'shtable', 'indoor-air', 'iahazard', 'iatable']
 # wkhtmltopdf parameters to format PDF's on Windows machines
 windowsPDFKitOptions = {}
-    #'quiet': '',
-    #'page-size': 'A5',
-    #'margin-top': '0.35in',
-    #'margin-right': '0.25in',
-    #'margin-bottom': '0.25in',
-    #'margin-left': '0.30in',
-    #'disable-smart-shrinking': ''}
+   # 'quiet': '',
+   # 'page-size': 'B7',
+   # 'margin-top': '0.35in',
+   # 'margin-right': '0.25in',
+   # 'margin-bottom': '0.25in',
+   # 'margin-left': '0.30in',
+   # 'disable-smart-shrinking': ''}
 # wkhtmltopdf parameters to format PDF's on *NIX machines
 nixPDFKitOptions = {
     'quiet': '',
@@ -46,6 +46,34 @@ nixPDFKitOptions = {
     'margin-bottom': '0.75in',
     'margin-left': '1.00in',
     'disable-smart-shrinking': ''}
+
+
+# Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
+def soilTier1EALTablesLookUp(groundWaterUtilityInput, distanceToNearestInput):
+    tempString = ''
+    if groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'greaterthan':
+        tempString = 'Table A-1'
+    elif groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'lessthan':
+        tempString = 'Table A-2'
+    elif groundWaterUtilityInput == 'nondrinking' and distanceToNearestInput == 'greaterthan':
+        tempString = 'Table B-1'
+    else:
+        tempString = 'Table B-2'
+    return tempString
+
+
+# Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
+def finalGroundWaterActionLevelsLookUp(groundWaterUtilityInput, distanceToNearestInput):
+    tempString = ''
+    if groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'lessthan':
+        tempString = 'Table D-1a'
+    elif groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'greaterthan':
+        tempString = 'Table D-1b'
+    elif groundWaterUtilityInput == 'nondrinking' and distanceToNearestInput == 'lessthan':
+        tempString = 'Table D-1c'
+    else:
+        tempString = 'Table D-1d'
+    return tempString
 
 
 # Helper function to merge a list of PDF files into one
@@ -86,9 +114,8 @@ def convertDataToUTF8Format(inputList):
 # Helper function replace '' with '-' to format better
 def replaceSpaceWithDash(inputList):
     return [element or '-' for element in inputList]    
-    
-    
-# Helper function convert html format to PDF format
+
+# Helper function convert html format to PDF format           
 def convertHtmlToPDF(fileName):
     iFile = 'static/'+fileName+'.html'
     oFile = 'static/'+fileName+'.pdf'
