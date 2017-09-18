@@ -18,6 +18,10 @@ class Summarytablea(models.Model):
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'SummaryTableA'
@@ -31,6 +35,10 @@ class Summarytableb(models.Model):
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -46,6 +54,10 @@ class Summarytablec(models.Model):
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'SummaryTableC'
@@ -58,6 +70,10 @@ class Summarytabled(models.Model):
     c4 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -77,6 +93,10 @@ class Tablea1(models.Model):
     c10 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c11 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableA_1'
@@ -92,6 +112,10 @@ class Tablea2(models.Model):
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c9 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -109,6 +133,10 @@ class Tableb1(models.Model):
     c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c9 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c10 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -128,6 +156,10 @@ class Tableb2(models.Model):
     c10 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c11 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableB_2'
@@ -144,6 +176,10 @@ class Tablec1A(models.Model):
     c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c9 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableC_1a'
@@ -159,6 +195,10 @@ class Tablec1B(models.Model):
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c9 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -180,6 +220,10 @@ class Tablec2(models.Model):
     c12 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c13 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c14 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -203,6 +247,10 @@ class Tablec3(models.Model):
     c14 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c15 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableC_3'
@@ -218,6 +266,10 @@ class Tabled1A(models.Model):
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableD_1a'
@@ -231,6 +283,10 @@ class Tabled1B(models.Model):
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -246,6 +302,10 @@ class Tabled1C(models.Model):
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableD_1c'
@@ -259,6 +319,10 @@ class Tabled1D(models.Model):
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -274,6 +338,10 @@ class Tabled2A(models.Model):
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableD_2a'
@@ -287,6 +355,10 @@ class Tabled2B(models.Model):
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableD_2b'
@@ -299,6 +371,10 @@ class Tabled2C(models.Model):
     c4 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -321,6 +397,10 @@ class Tabled3A(models.Model):
     c13 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c14 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableD_3a'
@@ -334,6 +414,10 @@ class Tabled3B(models.Model):
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -350,6 +434,10 @@ class Tabled4A(models.Model):
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableD_4a'
@@ -363,6 +451,10 @@ class Tabled4B(models.Model):
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -378,6 +470,10 @@ class Tabled4C(models.Model):
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableD_4c'
@@ -390,6 +486,10 @@ class Tabled4D(models.Model):
     c4 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -415,6 +515,10 @@ class Tabled4E(models.Model):
     c16 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c17 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableD_4e'
@@ -431,6 +535,10 @@ class Tabled4F(models.Model):
     c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c9 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableD_4f'
@@ -442,6 +550,10 @@ class Tabled5(models.Model):
     c3 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c4 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -467,6 +579,10 @@ class Tablee(models.Model):
     c16 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c17 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableE'
@@ -483,6 +599,10 @@ class Tablef2(models.Model):
     c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c9 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c10 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -503,6 +623,10 @@ class Tablef3(models.Model):
     c11 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c12 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableF_3'
@@ -522,6 +646,10 @@ class Tableg1(models.Model):
     c11 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c12 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableG_1'
@@ -535,6 +663,10 @@ class Tableg2(models.Model):
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -550,6 +682,10 @@ class Tableg3(models.Model):
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableG_3'
@@ -563,6 +699,10 @@ class Tableg4(models.Model):
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -596,6 +736,10 @@ class Tableh(models.Model):
     c24 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c25 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableH'
@@ -615,6 +759,10 @@ class Tablei1(models.Model):
     c11 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c12 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableI_1'
@@ -633,6 +781,10 @@ class Tablei2(models.Model):
     c10 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c11 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableI_2'
@@ -648,6 +800,10 @@ class Tablei3(models.Model):
     c7 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c8 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c9 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -671,6 +827,10 @@ class Tablej(models.Model):
     c15 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c16 = models.TextField(blank=True, null=True)  # This field type is a guess.
 
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
+
     class Meta:
         managed = False
         db_table = 'TableJ'
@@ -682,6 +842,10 @@ class Tablek(models.Model):
     c4 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -695,6 +859,10 @@ class Tablel(models.Model):
     c4 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c5 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c6 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c1
 
     class Meta:
         managed = False
@@ -735,6 +903,10 @@ class Allchemicals(models.Model):
     c31 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c32 = models.TextField(blank=True, null=True)  # This field type is a guess.
     c33 = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    # return the name of field to display in admin mode
+    def __str__(self):
+        return self.c3
 
     class Meta:
         managed = False
