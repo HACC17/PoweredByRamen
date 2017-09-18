@@ -247,7 +247,7 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
     indoor_air = indoorAirAndSoilGasActionLevelsList[2]
     iahazard = '-'
     iatable = 'Table C-3'
-    
+    print site_id
     list1 = [site_name, site_address1, site_address2, site_address3, site_id, date_of_search]
 
     list2 = [landUse, groundWaterUtility, distanceToNearest, contaminantName,

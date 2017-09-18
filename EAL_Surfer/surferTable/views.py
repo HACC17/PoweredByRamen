@@ -78,8 +78,10 @@ def index(request):
             # process each contaminant individually and store result in list
             for contaminantName in contaminantNameList:
                 # pass user inputs to compiler logic and get a dictionary of results back
-                resultDict = surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName, '', '',
-                                              '', siteName, siteId, siteaddress1, siteaddress2, siteaddress3, dateofsearch)
+                resultDict = surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminantName,
+                                     '', '', '',
+                                     siteName, siteaddress1, siteaddress2, siteaddress3, siteId, dateofsearch)
+
                 soil.append(resultDict.get('soil'))
                 groundWater.append(resultDict.get('groundWater'))
                 soilVapor.append(resultDict.get('soilVapor'))

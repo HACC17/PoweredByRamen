@@ -48,7 +48,8 @@ def surferTableInput(landUse, groundWaterUtility, distanceToNearest, contaminant
     _site_address3 = optional_site_address3
     _site_id = optional_site_id
     _date_of_search = optional_date_of_search
-    
+    print optional_site_id
+    print _site_id
     # compute the needed values
     soilActionLevelsList = soilActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
     groundWaterActionLevelsList = groundWaterActionLevels(contaminantName, landUse, groundWaterUtility, distanceToNearest)
