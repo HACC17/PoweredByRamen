@@ -15,7 +15,6 @@ def checkTargetOrgansAndHealthEffect(chemName, tableName, column):
 # Return table name based on land use input
 def humanToxicityTableLookUp(landUse):
     tempString = 'Table I-2'
-    print landUse
     if landUse == 'Unrestricted':
         tempString = 'Table I-1'
     return tempString
