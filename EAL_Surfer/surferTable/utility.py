@@ -48,6 +48,34 @@ nixPDFKitOptions = {
     'disable-smart-shrinking': ''}
 
 
+# Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
+def soilTier1EALTablesLookUp(groundWaterUtilityInput, distanceToNearestInput):
+    tempString = ''
+    if groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'greaterthan':
+        tempString = 'Table A-1'
+    elif groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'lessthan':
+        tempString = 'Table A-2'
+    elif groundWaterUtilityInput == 'nondrinking' and distanceToNearestInput == 'greaterthan':
+        tempString = 'Table B-1'
+    else:
+        tempString = 'Table B-2'
+    return tempString
+
+
+# Return table name based on permutation of groundwater utility and distance to nearest surface waster body inputs
+def finalGroundWaterActionLevelsLookUp(groundWaterUtilityInput, distanceToNearestInput):
+    tempString = ''
+    if groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'lessthan':
+        tempString = 'Table D-1a'
+    elif groundWaterUtilityInput == 'drinking' and distanceToNearestInput == 'greaterthan':
+        tempString = 'Table D-1b'
+    elif groundWaterUtilityInput == 'nondrinking' and distanceToNearestInput == 'lessthan':
+        tempString = 'Table D-1c'
+    else:
+        tempString = 'Table D-1d'
+    return tempString
+
+
 # Helper function to merge a list of PDF files into one
 def mergePDFFiles(pdflist):
     filename = 'result.pdf'

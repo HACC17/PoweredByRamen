@@ -195,7 +195,12 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
     # Soil Environmental Hazards
     direct_exposure = soilActionLevelsList[3]
     dehazard = '-'
-    detable = 'Table I-1'
+
+    # compiler logic
+    detable = 'Table I-2'
+    if landUse == 'unrestricted':
+        detable = 'Table I-I'
+
     vapor_emission = soilActionLevelsList[6]
     vehazard = '-'
     vetable = 'Table C-1b'
@@ -215,7 +220,10 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
     # Groundwater Environmental Hazards     
     drink_water = groundWaterActionLevelsList[0]
     dwhazard = '-'
-    dwtable = 'Table D-1a'
+
+    # compiler logic
+    dwtable = finalGroundWaterActionLevelsLookUp(groundWaterUtility, distanceToNearest)
+
     v_emission_two = groundWaterActionLevelsList[3]
     ve2hazard = '-'
     ve2table = 'Table C-1a'
@@ -224,7 +232,12 @@ def findSurfReportTemplateReplaceList(site_name, site_address1, site_address2, s
     aetable = 'Table D-4a'
     gross_contamination = groundWaterActionLevelsList[9]
     gc2hazard = '-'
-    gc2table = 'Table G-1'
+
+    # compiler logic
+    gc2table = 'Table G-2'
+    if distanceToNearest == 'greaterthan':
+        gc2table = 'Table G-1'
+
     final_ground_tier1 = findMinFromList([drink_water, v_emission_two, aquatic_ecotoxicity, gross_contamination])
     final_ground_basis = groundWaterActionLevelsList[11]
     # Other Tier 1 EALs     
