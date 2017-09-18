@@ -30,3 +30,13 @@ python manage.py runserver
 ```
 4. Open web browser and enter url: "http://127.0.0.1:8000/" (left it as default)
 5. Enjoy
+
+## Optional
+1. There's an admin page for administrator to add/update/delete data from the back-end Sqlite DB
+2. Before that create a superuser for the app via. command
+```bash
+python manage.py createsuperuser
+```
+3. Access the administrative page by going to "http://127.0.0.1:8000/admin"
+4. This page will prompt for username and password created in step 2
+5. Now you have admin access to the back-end DB
