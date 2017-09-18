@@ -18,7 +18,7 @@ chemicalSummaryTemplate = 'chemical_summary_template.html'
 surferReportTemplate = 'surfer_report_template.html'
 # list of strings to replace in template
 chemicalSummaryTemplateList = ['chemical_input', 
-            'cancer_slope', 'cancer_inha', 'refer_dose_oral', 'refer_dose_inha', 'gastr_intest', 'skin_absorb', 'target_excess', 'target_hazard',
+            'cancer_slope', 'cancer_inha', 'refer_dose_oral', 'refer_dose_inha', 'gastr_intest', 'skin_absorb', 'target_excess', 'tecru_table', 'target_hazard', 'thqu_table',
             'fresh_chronic', 'marine_chronic', 'estuary_chronic', 'fresh_acute', 'marine_acute', 'estruary_acute', 'bio_goal',
             'molecular_weight', 'ps_v', 'ps_s', 'organic_carbon', 'diff_in_air', 'diff_in_water', 'solu_water', 'hlc_atm', 'hlc_unit',
             'health_carc', 'health_muta', 'health_alim', 'health_card', 'health_deve', 'health_endo', 'health_eye', 'health_hema', 

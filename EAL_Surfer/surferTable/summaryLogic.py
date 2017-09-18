@@ -14,9 +14,11 @@ def checkTargetOrgansAndHealthEffect(chemName, tableName, column):
     
 # Return table name based on land use input
 def humanToxicityTableLookUp(landUse):
-    tempString = 'TableI2'
+    print landUse
+    tempString = 'Table I-2'
     if landUse == 'unrestricted':
-        tempString = 'TableI1'
+        tempString = 'Table I-1'
+    print tempString
     return tempString
     
 # these variable names are map to the chemicalSummaryTemplateList found in utility file
@@ -165,7 +167,8 @@ def findChemicalSummaryTemplateReplaceList(contaminantName, landUse,
     health_other = checkTargetOrgansAndHealthEffect(contaminantName, tableNamePotentialHealth, tableColumnOther)
 
     result = [contaminantName, cancer_slope, cancer_inha, refer_dose_oral, refer_dose_inha, gastr_intest, skin_absorb, 
-              target_excess, target_hazard, fresh_chronic, marine_chronic, estuary_chronic, fresh_acute, marine_acute, 
+              target_excess, tableNameHumanToxicityFactorsLookUp, target_hazard, tableNameHumanToxicityFactorsLookUp,
+              fresh_chronic, marine_chronic, estuary_chronic, fresh_acute, marine_acute,
               estruary_acute, bio_goal, molecular_weight, ps_v, ps_s, organic_carbon, diff_in_air, diff_in_water, 
               solu_water, hlc_atm, hlc_unit, health_carc, health_muta, health_alim, health_card, health_deve, health_endo, 
               health_eye, health_hema, health_immu, health_kidn, health_nerv, health_repr, health_resp, health_skin, health_other]
