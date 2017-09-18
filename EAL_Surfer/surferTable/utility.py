@@ -66,7 +66,7 @@ def mergePDFFiles(pdflist):
 # Scrub and convert user input for selected site values
 def selectedSiteScenarioConvert(contaminantName, landUse, groundWaterUtility, distanceToNearest):
     contaminantNameConvert = contaminantName.encode('utf-8')
-    landUseConvert = 'Commercial/Industrial Only'
+    landUseConvert = 'Comm/Indst Only'
     groundWaterUtilityConvert = 'Nondrinking Water Resource'
     distanceToNearestConvert = '> 150m'
     if landUse == 'unrestricted':
