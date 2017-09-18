@@ -581,7 +581,7 @@ class Tablee(models.Model):
 
     # return the name of field to display in admin mode
     def __str__(self):
-        return self.c1
+        return self.c2
 
     class Meta:
         managed = False
